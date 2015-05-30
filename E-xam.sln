@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-xam", "E-xam\E-xam.csproj", "{2F2B0EDC-1E94-4344-8E5E-FE828D2C259B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-xam.MVCWebUI", "E-xam\E-xam.MVCWebUI.csproj", "{2F2B0EDC-1E94-4344-8E5E-FE828D2C259B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-xam.Tests", "E-xam.Tests\E-xam.Tests.csproj", "{AE06C2E0-A9BA-4E67-A9FF-6C2DE3F1ACDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{124B44E5-53C2-4138-AAA9-A06F796405E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-xam.MVCWebUI.Controllers", "E-xam.MVCWebUI.Controllers\E-xam.MVCWebUI.Controllers.csproj", "{F93E9197-E443-4D46-9785-181490B19F3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B381F3E2-2733-400E-83F1-E84E3370E8B7}"
+	ProjectSection(SolutionItems) = preProject
+		E-xam\UtilityTest.cs = E-xam\UtilityTest.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{BA9ABCA0-ECC7-4155-9E48-01FE03BEC400}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils.Authentication", "Authentication\Utils.Authentication.csproj", "{4E80A915-7C73-444A-8632-42C71B0D3238}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{F241DB9C-BBEF-4009-926D-66594EB1907C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamDomain.Model", "ExamDomain.Model\ExamDomain.Model.csproj", "{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserDomain.Model", "UserDomain.Model\UserDomain.Model.csproj", "{92BF3199-46B4-424E-B749-CBAD85D6BE36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +40,32 @@ Global
 		{AE06C2E0-A9BA-4E67-A9FF-6C2DE3F1ACDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE06C2E0-A9BA-4E67-A9FF-6C2DE3F1ACDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE06C2E0-A9BA-4E67-A9FF-6C2DE3F1ACDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F93E9197-E443-4D46-9785-181490B19F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F93E9197-E443-4D46-9785-181490B19F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F93E9197-E443-4D46-9785-181490B19F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F93E9197-E443-4D46-9785-181490B19F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E80A915-7C73-444A-8632-42C71B0D3238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E80A915-7C73-444A-8632-42C71B0D3238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E80A915-7C73-444A-8632-42C71B0D3238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E80A915-7C73-444A-8632-42C71B0D3238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92BF3199-46B4-424E-B749-CBAD85D6BE36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92BF3199-46B4-424E-B749-CBAD85D6BE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92BF3199-46B4-424E-B749-CBAD85D6BE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92BF3199-46B4-424E-B749-CBAD85D6BE36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F2B0EDC-1E94-4344-8E5E-FE828D2C259B} = {124B44E5-53C2-4138-AAA9-A06F796405E1}
+		{AE06C2E0-A9BA-4E67-A9FF-6C2DE3F1ACDA} = {B381F3E2-2733-400E-83F1-E84E3370E8B7}
+		{F93E9197-E443-4D46-9785-181490B19F3E} = {124B44E5-53C2-4138-AAA9-A06F796405E1}
+		{4E80A915-7C73-444A-8632-42C71B0D3238} = {BA9ABCA0-ECC7-4155-9E48-01FE03BEC400}
+		{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21} = {F241DB9C-BBEF-4009-926D-66594EB1907C}
+		{92BF3199-46B4-424E-B749-CBAD85D6BE36} = {F241DB9C-BBEF-4009-926D-66594EB1907C}
 	EndGlobalSection
 EndGlobal

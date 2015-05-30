@@ -1,14 +1,17 @@
-﻿using System;
+﻿
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Utils.Authentication;
+using E_xam.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using E_xam.Models;
+using UserDomain.Model;
 
-namespace E_xam.Controllers
+
+namespace E_xam.MVCWebUI.Controllers
 {
     [Authorize]
     public class ManageController : Controller

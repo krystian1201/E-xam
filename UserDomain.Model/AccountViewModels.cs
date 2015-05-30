@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace E_xam.Models
+namespace UserDomain.Model
 {
     public class ExternalLoginConfirmationViewModel
     {

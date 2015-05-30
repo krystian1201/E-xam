@@ -1,16 +1,16 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using E_xam.Models;
+using UserDomain.Model;
+using Utils.Authentication;
 
-namespace E_xam.Controllers
+//using UserDomain.Model;
+
+namespace E_xam.MVCWebUI.Controllers
 {
     [Authorize]
     public class AccountController : Controller

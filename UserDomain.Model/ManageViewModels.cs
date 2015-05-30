@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace E_xam.Models
+namespace UserDomain.Model
 {
     public class IndexViewModel
     {
