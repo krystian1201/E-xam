@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
+using Shared.Repository;
 using UserDomain.Model;
 
 namespace Utils.Authentication

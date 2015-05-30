@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Utils.Authentication;
-using E_xam.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

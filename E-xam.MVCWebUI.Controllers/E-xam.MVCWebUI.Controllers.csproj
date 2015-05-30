@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -56,14 +59,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountController.cs" />
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="CoursesController.cs" />
+    <Compile Include="ExamsController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="ManageController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Authentication\Utils.Authentication.csproj">
       <Project>{4E80A915-7C73-444A-8632-42C71B0D3238}</Project>
       <Name>Utils.Authentication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExamDomain.Model\ExamDomain.Model.csproj">
+      <Project>{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}</Project>
+      <Name>ExamDomain.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserDomain.Model\UserDomain.Model.csproj">
       <Project>{92BF3199-46B4-424E-B749-CBAD85D6BE36}</Project>

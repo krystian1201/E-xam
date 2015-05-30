@@ -1,9 +1,7 @@
 ﻿
 using System.Web.Mvc;
-
+using E_xam.MVCWebUI.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using E_xam.Controllers;
 
 namespace E_xam.Tests.Controllers
 {

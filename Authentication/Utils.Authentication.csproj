@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shared.Repository\Shared.Repository.csproj">
+      <Project>{6302EBFE-3204-4194-AD20-856156B48C2B}</Project>
+      <Name>Shared.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserDomain.Model\UserDomain.Model.csproj">
       <Project>{92bf3199-46b4-424e-b749-cbad85d6be36}</Project>
       <Name>UserDomain.Model</Name>
