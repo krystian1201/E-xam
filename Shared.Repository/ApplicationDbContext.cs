@@ -25,5 +25,11 @@ namespace Shared.Repository
         {
             return new ApplicationDbContext();
         }
+
+        static ApplicationDbContext()
+        {
+             //var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+            // System.Data.SqlServerCe.
+        }
     }
 }
