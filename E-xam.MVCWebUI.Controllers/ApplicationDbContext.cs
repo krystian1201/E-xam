@@ -16,7 +16,7 @@ namespace UserDomain.Model
         public DbSet<Course> Courses { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("E_xam", throwIfV1Schema: false)
         {
         }
 

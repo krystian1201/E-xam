@@ -52,6 +52,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterface", "{16086632-8594-446D-B2C3-B25F4C9B0390}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{85CF4AAA-465C-4761-8921-82A885537250}"
+	ProjectSection(SolutionItems) = preProject
+		Diagrams\CodeMap_BeforeRepositories.dgml = Diagrams\CodeMap_BeforeRepositories.dgml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

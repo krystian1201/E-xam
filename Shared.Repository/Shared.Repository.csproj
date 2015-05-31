@@ -48,13 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Migrations\201505311430202_Initial migration.cs" />
-    <Compile Include="Migrations\201505311430202_Initial migration.Designer.cs">
-      <DependentUpon>201505311430202_Initial migration.cs</DependentUpon>
+    <Compile Include="Migrations\201505311703248_Seed db.cs" />
+    <Compile Include="Migrations\201505311703248_Seed db.Designer.cs">
+      <DependentUpon>201505311703248_Seed db.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505311448029_Add Exam, Question, Course classes.cs" />
-    <Compile Include="Migrations\201505311448029_Add Exam, Question, Course classes.Designer.cs">
-      <DependentUpon>201505311448029_Add Exam, Question, Course classes.cs</DependentUpon>
+    <Compile Include="Migrations\201505311734042_Seed db 2.cs" />
+    <Compile Include="Migrations\201505311734042_Seed db 2.Designer.cs">
+      <DependentUpon>201505311734042_Seed db 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505311743439_Seed db 3.cs" />
+    <Compile Include="Migrations\201505311743439_Seed db 3.Designer.cs">
+      <DependentUpon>201505311743439_Seed db 3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505311745047_Seed db 4.cs" />
+    <Compile Include="Migrations\201505311745047_Seed db 4.Designer.cs">
+      <DependentUpon>201505311745047_Seed db 4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,11 +82,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505311430202_Initial migration.resx">
-      <DependentUpon>201505311430202_Initial migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505311703248_Seed db.resx">
+      <DependentUpon>201505311703248_Seed db.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311448029_Add Exam, Question, Course classes.resx">
-      <DependentUpon>201505311448029_Add Exam, Question, Course classes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505311734042_Seed db 2.resx">
+      <DependentUpon>201505311734042_Seed db 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505311743439_Seed db 3.resx">
+      <DependentUpon>201505311743439_Seed db 3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505311745047_Seed db 4.resx">
+      <DependentUpon>201505311745047_Seed db 4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

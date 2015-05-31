@@ -7,13 +7,13 @@ namespace Shared.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initialmigration : IMigrationMetadata
+    public sealed partial class Seeddb2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initialmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Seeddb2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505311430202_Initial migration"; }
+            get { return "201505311734042_Seed db 2"; }
         }
         
         string IMigrationMetadata.Source

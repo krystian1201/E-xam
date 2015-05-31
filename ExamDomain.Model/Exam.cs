@@ -20,7 +20,7 @@ namespace ExamDomain.Model
 
         public string Place { get; set; }
 
-        
+
 
         //public int MaxPoints
         //{

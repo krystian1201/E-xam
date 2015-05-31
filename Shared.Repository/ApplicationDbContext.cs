@@ -3,6 +3,7 @@ using System.Data.Entity;
 
 using Microsoft.AspNet.Identity.EntityFramework;
 
+using Shared.Repository.Migrations;
 using ExamDomain.Model;
 using UserDomain.Model;
 
@@ -17,8 +18,10 @@ namespace Shared.Repository
         public DbSet<Course> Courses { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("E_xam", throwIfV1Schema: false)
         {
+            //it is needed for automatic migrations to work
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>()); 
         }
 
         public static ApplicationDbContext Create()
@@ -26,10 +29,5 @@ namespace Shared.Repository
             return new ApplicationDbContext();
         }
 
-        static ApplicationDbContext()
-        {
-             //var ensureDLLIsCopied = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-            // System.Data.SqlServerCe.
-        }
     }
 }

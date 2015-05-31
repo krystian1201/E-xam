@@ -7,13 +7,13 @@ namespace Shared.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddExamQuestionCourseclasses : IMigrationMetadata
+    public sealed partial class Seeddb4 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddExamQuestionCourseclasses));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Seeddb4));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505311448029_Add Exam, Question, Course classes"; }
+            get { return "201505311745047_Seed db 4"; }
         }
         
         string IMigrationMetadata.Source
