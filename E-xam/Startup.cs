@@ -1,9 +1,10 @@
 ﻿
-using Utils.Authentication;
+using E_xam;
 using Microsoft.Owin;
 using Owin;
+using Utils.Authentication;
 
-[assembly: OwinStartupAttribute(typeof(E_xam.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace E_xam
 {
     public partial class Startup
