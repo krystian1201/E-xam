@@ -1,17 +1,18 @@
+
 using System.Data.Entity.Migrations;
 
 namespace Shared.Repository.Migrations
 {
-    public partial class Seeddb3 : DbMigration
+    public partial class Seeddb8 : DbMigration
     {
         public override void Up()
         {
-            DropColumn("dbo.Questions", "Points");
+            AddColumn("dbo.Courses", "ECTS", c => c.Int(nullable: false));
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Questions", "Points", c => c.Int(nullable: false));
+            DropColumn("dbo.Courses", "ECTS");
         }
     }
 }

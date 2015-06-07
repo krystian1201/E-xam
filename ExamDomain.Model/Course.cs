@@ -1,4 +1,5 @@
 ﻿
+
 namespace ExamDomain.Model
 {
     public class Course
@@ -6,5 +7,7 @@ namespace ExamDomain.Model
         public int ID { get; set; }
 
         public string Name { get; set; }
+
+        public int ECTS { get; set; }
     }
 }

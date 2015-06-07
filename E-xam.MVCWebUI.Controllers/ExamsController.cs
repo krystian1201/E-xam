@@ -1,22 +1,26 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿
 using System.Net;
 using System.Web.Mvc;
 
 using ExamDomain.Model;
-using UserDomain.Model;
+using Shared.Repository;
 
 namespace E_xam.MVCWebUI.Controllers
 {
     public class ExamsController : Controller
     {
-        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IRepository<Exam> _repository;
+
+        public ExamsController()
+        {
+            _repository = new Repository<Exam>(new ApplicationDbContext());
+        }
 
         // GET: Exams
         //[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            return View(db.Exams.ToList());
+            return View(_repository.GetAll());
         }
 
         // GET: Exams/Details/5
@@ -26,11 +30,13 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Exam exam = db.Exams.Find(id);
+
+            Exam exam = _repository.GetById(id.Value);
             if (exam == null)
             {
                 return HttpNotFound();
             }
+
             return View(exam);
         }
 
@@ -45,13 +51,12 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Bind(Include = "ID,Name,Date,Duration")]
-        public ActionResult Create( Exam exam)
+        public ActionResult Create([Bind(Include = "ID,Name,Date,Duration")] Exam exam)
         {
             if (ModelState.IsValid)
             {
-                db.Exams.Add(exam);
-                db.SaveChanges();
+                _repository.Add(exam);
+
                 return RedirectToAction("Index");
             }
 
@@ -65,11 +70,13 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Exam exam = db.Exams.Find(id);
+
+            Exam exam = _repository.GetById(id.Value);
             if (exam == null)
             {
                 return HttpNotFound();
             }
+
             return View(exam);
         }
 
@@ -82,25 +89,29 @@ namespace E_xam.MVCWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(exam).State = EntityState.Modified;
-                db.SaveChanges();
+                _repository.Update(exam);
+
                 return RedirectToAction("Index");
             }
+
             return View(exam);
         }
 
         // GET: Exams/Delete/5
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Exam exam = db.Exams.Find(id);
+
+            Exam exam = _repository.GetById(id.Value);
             if (exam == null)
             {
                 return HttpNotFound();
             }
+
             return View(exam);
         }
 
@@ -109,18 +120,14 @@ namespace E_xam.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Exam exam = db.Exams.Find(id);
-            db.Exams.Remove(exam);
-            db.SaveChanges();
+            _repository.Delete(id);
+
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            _repository.Dispose();
             base.Dispose(disposing);
         }
     }

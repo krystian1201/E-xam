@@ -48,6 +48,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Migrations\201506070756196_Seed db 5.cs" />
+    <Compile Include="Migrations\201506070756196_Seed db 5.Designer.cs">
+      <DependentUpon>201506070756196_Seed db 5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506070805052_Seed db 6.cs" />
+    <Compile Include="Migrations\201506070805052_Seed db 6.Designer.cs">
+      <DependentUpon>201506070805052_Seed db 6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506070828270_Seed db 7.cs" />
+    <Compile Include="Migrations\201506070828270_Seed db 7.Designer.cs">
+      <DependentUpon>201506070828270_Seed db 7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506070831148_Seed db 8.cs" />
+    <Compile Include="Migrations\201506070831148_Seed db 8.Designer.cs">
+      <DependentUpon>201506070831148_Seed db 8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506070838238_Seed db 9.cs" />
+    <Compile Include="Migrations\201506070838238_Seed db 9.Designer.cs">
+      <DependentUpon>201506070838238_Seed db 9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506071019255_Seed db 10.cs" />
+    <Compile Include="Migrations\201506071019255_Seed db 10.Designer.cs">
+      <DependentUpon>201506071019255_Seed db 10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201505311703248_Seed db.cs" />
     <Compile Include="Migrations\201505311703248_Seed db.Designer.cs">
       <DependentUpon>201505311703248_Seed db.cs</DependentUpon>
@@ -93,6 +119,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505311745047_Seed db 4.resx">
       <DependentUpon>201505311745047_Seed db 4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506070756196_Seed db 5.resx">
+      <DependentUpon>201506070756196_Seed db 5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506070805052_Seed db 6.resx">
+      <DependentUpon>201506070805052_Seed db 6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506070828270_Seed db 7.resx">
+      <DependentUpon>201506070828270_Seed db 7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506070831148_Seed db 8.resx">
+      <DependentUpon>201506070831148_Seed db 8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506070838238_Seed db 9.resx">
+      <DependentUpon>201506070838238_Seed db 9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506071019255_Seed db 10.resx">
+      <DependentUpon>201506071019255_Seed db 10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

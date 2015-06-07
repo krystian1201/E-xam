@@ -83,8 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountController.cs" />
-    <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="CoursesController.cs" />
     <Compile Include="ExamsController.cs" />
     <Compile Include="HomeController.cs" />
     <Compile Include="ManageController.cs" />
@@ -99,6 +97,10 @@
     <ProjectReference Include="..\ExamDomain.Model\ExamDomain.Model.csproj">
       <Project>{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}</Project>
       <Name>ExamDomain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Repository\Shared.Repository.csproj">
+      <Project>{6302EBFE-3204-4194-AD20-856156B48C2B}</Project>
+      <Name>Shared.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserDomain.Model\UserDomain.Model.csproj">
       <Project>{92BF3199-46B4-424E-B749-CBAD85D6BE36}</Project>

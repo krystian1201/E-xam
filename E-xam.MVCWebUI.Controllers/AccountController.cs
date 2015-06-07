@@ -5,9 +5,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-
-using Utils.Authentication;
 using UserDomain.Model;
+using Utils.Authentication;
 
 namespace E_xam.MVCWebUI.Controllers
 {

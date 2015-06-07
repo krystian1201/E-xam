@@ -1,10 +1,8 @@
 ﻿
 using System.Data.Entity;
-
-using Microsoft.AspNet.Identity.EntityFramework;
-
-using Shared.Repository.Migrations;
 using ExamDomain.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Shared.Repository.Migrations;
 using UserDomain.Model;
 
 namespace Shared.Repository

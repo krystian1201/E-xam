@@ -5,7 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 
 using ExamDomain.Model;
-using UserDomain.Model;
+using Shared.Repository;
 
 namespace E_xam.MVCWebUI.Controllers
 {

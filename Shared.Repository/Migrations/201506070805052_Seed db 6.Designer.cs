@@ -7,13 +7,13 @@ using System.Resources;
 namespace Shared.Repository.Migrations
 {
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Seeddb4 : IMigrationMetadata
+    public sealed partial class Seeddb6 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Seeddb4));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Seeddb6));
         
         string IMigrationMetadata.Id
         {
-            get { return "201505311745047_Seed db 4"; }
+            get { return "201506070805052_Seed db 6"; }
         }
         
         string IMigrationMetadata.Source

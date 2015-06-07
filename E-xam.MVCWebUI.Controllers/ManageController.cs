@@ -3,12 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Utils.Authentication;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UserDomain.Model;
-
+using Utils.Authentication;
 
 namespace E_xam.MVCWebUI.Controllers
 {

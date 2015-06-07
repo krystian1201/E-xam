@@ -1,28 +1,28 @@
 ﻿
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-
 using ExamDomain.Model;
-using UserDomain.Model;
+using Shared.Repository;
 
 namespace E_xam.MVCWebUI.Controllers
 {
     public class QuestionsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        
+        private readonly IRepository<Question> _repository;
+
+        public QuestionsController()
+        {
+            _repository = new Repository<Question>(new ApplicationDbContext());
+        }
+
 
         // GET: Questions
         public ActionResult Index()
         {
-            return View(db.Questions.ToList());
+            return View(_repository.GetAll());
         }
 
-        //public ActionResult DisplayByExam(int examID)
-        //{
-        //    return View();
-        //}
 
         // GET: Questions/Details/5
         [Route("Question/{id:int}")]
@@ -32,13 +32,16 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
+
+            Question question = _repository.GetById(id.Value);
             if (question == null)
             {
                 return HttpNotFound();
             }
+
             return View(question);
         }
+
 
         // GET: Questions/Create
         public ActionResult Create()
@@ -55,13 +58,14 @@ namespace E_xam.MVCWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Questions.Add(question);
-                db.SaveChanges();
+                _repository.Add(question);
+
                 return RedirectToAction("Index");
             }
 
             return View(question);
         }
+
 
         // GET: Questions/Edit/5
         public ActionResult Edit(int? id)
@@ -70,7 +74,9 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
+
+            Question question = _repository.GetById(id.Value);
+
             if (question == null)
             {
                 return HttpNotFound();
@@ -87,10 +93,11 @@ namespace E_xam.MVCWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(question).State = EntityState.Modified;
-                db.SaveChanges();
+                _repository.Update(question);
+
                 return RedirectToAction("Index");
             }
+
             return View(question);
         }
 
@@ -101,11 +108,14 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
+
+            Question question = _repository.GetById(id.Value);
+
             if (question == null)
             {
                 return HttpNotFound();
             }
+
             return View(question);
         }
 
@@ -114,19 +124,16 @@ namespace E_xam.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Question question = db.Questions.Find(id);
-            db.Questions.Remove(question);
-            db.SaveChanges();
+            _repository.Delete(id);
+
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            _repository.Dispose();
             base.Dispose(disposing);
         }
+
     }
 }
