@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterface", "UserInterf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{85CF4AAA-465C-4761-8921-82A885537250}"
 	ProjectSection(SolutionItems) = preProject
+		Diagrams\CodeMap_AfterExam_Question_Repository.dgml = Diagrams\CodeMap_AfterExam_Question_Repository.dgml
 		Diagrams\CodeMap_BeforeRepositories.dgml = Diagrams\CodeMap_BeforeRepositories.dgml
 	EndProjectSection
 EndProject

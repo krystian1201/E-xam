@@ -17,6 +17,12 @@ namespace E_xam.MVCWebUI.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult _ClosedQuestionPartial()
+        {
+            return PartialView();
+        }
+
         // GET: Questions
         public ActionResult Index()
         {
@@ -54,7 +60,7 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Time,Text,Points")] Question question)
+        public ActionResult Create([Bind(Include = "ID,TimeToRespond,Text,Points")] Question question)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +95,7 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Time,Text,Points")] Question question)
+        public ActionResult Edit([Bind(Include = "ID,TimeToRespond,Text,Points")] Question question)
         {
             if (ModelState.IsValid)
             {

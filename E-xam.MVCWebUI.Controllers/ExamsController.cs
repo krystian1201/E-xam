@@ -1,7 +1,6 @@
 ﻿
 using System.Net;
 using System.Web.Mvc;
-
 using ExamDomain.Model;
 using Shared.Repository;
 

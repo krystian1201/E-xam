@@ -67,12 +67,12 @@ namespace Shared.Repository.Migrations
 
             var questions = new List<Question>()
             {
-                 new Question {Answers = null, Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
-                    Time = new TimeSpan(0, 0, 1, 0)},
-                 new Question {Answers = null, Exam = null, ID = 1, Points = 3, Text = "How are you?", 
-                    Time = new TimeSpan(0, 0, 2, 0)},
-                 new Question {Answers = null, Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
-                    Time = new TimeSpan(0, 0, 4, 0)}
+                 new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
+                 new OpenQuestion {Exam = null, ID = 1, Points = 3, Text = "How are you?", 
+                    TimeToRespond = new TimeSpan(0, 0, 2, 0)},
+                 new OpenQuestion {Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
+                    TimeToRespond = new TimeSpan(0, 0, 4, 0)}
 
             };
 
