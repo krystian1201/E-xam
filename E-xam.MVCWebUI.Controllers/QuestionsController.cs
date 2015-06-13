@@ -14,18 +14,27 @@ namespace E_xam.MVCWebUI.Controllers
         public QuestionsController()
         {
             _repository = new Repository<Question>(new ApplicationDbContext());
+            
         }
 
 
-        [HttpGet]
-        public ActionResult _ClosedQuestionPartial()
-        {
-            return PartialView();
-        }
+        //[HttpPost]
+        //public ActionResult _ClosedQuestionPartial(string questionType)
+        //{
+        //    if (questionType == "Closed" &&
+        //        (bool)System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] == false)
+        //    {
+        //        System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] = true;
+        //        return PartialView();
+        //    }
+
+        //    return null;
+        //}
 
         // GET: Questions
         public ActionResult Index()
         {
+            
             return View(_repository.GetAll());
         }
 
@@ -52,6 +61,7 @@ namespace E_xam.MVCWebUI.Controllers
         // GET: Questions/Create
         public ActionResult Create()
         {
+            //System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] = false;
             return View();
         }
 
