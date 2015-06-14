@@ -1,12 +1,39 @@
 ﻿
 
-var myFunction = function() 
+$(document).ready(function ()
 {
-    $("#NumberOfAnswersTextBox").change(function () {
 
+    //If question is of "closed" type, we load
+    //a panel that will ask user for answer choices
+    $("#IsClosedRadioButton").click(function ()
+    {
+        //TODO: check if there is already a partial view (not so important)
+        $("#ClosedQuestionSection").load("/Questions/_ClosedQuestionPartial", onClosedQuestionViewLoaded);
+
+        return true;
+    });
+
+    //If question is of "open" type, the panel for
+    //available answer choices is removed
+    $("#IsOpenRadioButton").click(function ()
+    {
+        $("#ClosedQuestionSection").empty();
+
+        return true;
+    });
+
+});
+
+
+var onClosedQuestionViewLoaded = function() 
+{
+    //If user selected new value for number of answer choices
+    $("#NumberOfAnswersTextBox").change(function ()
+    {
         var $numberOfAnswers = $("#NumberOfAnswersTextBox").val();
 
-        if ($numberOfAnswers < 1 || $numberOfAnswers > 10) {
+        if ($numberOfAnswers < 1 || $numberOfAnswers > 10)
+        {
             //in MVC validation is done client-side out-of-the-box
 
             //var validationElement = "<label class=\"text-danger\">" +
@@ -17,69 +44,13 @@ var myFunction = function()
         }
         else
         {
-            //first elements created previously need to be removed
-            //RemoveElementsFromPreviousSelection();
-
-            //AppendDivOpeningTags();
-
-            //AppendAnswerTextBoxes();
-
-            //AppendDivClosingTags();
-
-            //$.get('@Url.Action("_ClosedQuestionAnswersPartial", "Questions" )', function (data)
-            //{
-            //    $('#ClosedAnswersDiv').html(data);
-            //});
-
-            //$.load("/Questions/_ClosedQuestionAnswersPartial", function (data)
-            //{
-            //    $('#ClosedAnswersDiv').html(data);
-            //});
-
-           
-            //TODO: return the closed question (main) partial view but with different number of answers
-            
-            $("#ClosedAnswersDiv").load("/Questions/_ClosedQuestionAnswersPartial", { numberOfAnswers: $numberOfAnswers });
-
+            $("#ClosedAnswersDiv").
+                load("/Questions/_ClosedQuestionAnswersPartial", { numberOfAnswers: $numberOfAnswers });
         }
     });
 }
     
 
 
-$(document).ready(function ()
-{
-    
-        $("#IsClosedRadioButton").click(function () 
-        {
-            //TODO: check if there is already a partial view (not so important)
-            $("#ClosedQuestionSection").load("/Questions/_ClosedQuestionPartial", myFunction);
 
-
-            //$("#ClosedQuestionTable").css("visibility", "visible");
-
-            //$.get('@Url.Action("_ClosedQuestionPartial", "Questions", new { questionType = "closed" } )', function (data) {
-            //    $('#ClosedQuestionSection').html(data);
-            //});
-
-            //var div = "<div id=\"ClosedQuestionPanel\" style=\"visibility: hidden\"></div>";
-            //$("#QuestionTypeRadioButtons").append(div);
-
-            return true;
-        });
-
-        $("#IsOpenRadioButton").click(function () 
-        {
-            $("#ClosedQuestionSection").empty();
-
-
-            //$("#ClosedQuestionTable").css("visibility", "hidden");
-
-            //"visibility: collapse" works only in IE and Firefox
-            //in Chrome it's the same as "hidden"
-            //$("#ClosedQuestionTable").css("visibility", "collapse");
-            return true;
-        });
-    
-});
     
