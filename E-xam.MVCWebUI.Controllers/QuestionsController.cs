@@ -1,8 +1,10 @@
 ﻿
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using ExamDomain.Model;
 using Shared.Repository;
+
 
 namespace E_xam.MVCWebUI.Controllers
 {
@@ -17,19 +19,26 @@ namespace E_xam.MVCWebUI.Controllers
             
         }
 
-
+        
         //[HttpPost]
-        //public ActionResult _ClosedQuestionPartial(string questionType)
-        //{
-        //    if (questionType == "Closed" &&
-        //        (bool)System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] == false)
-        //    {
-        //        System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] = true;
-        //        return PartialView();
-        //    }
+        public ActionResult _ClosedQuestionPartial()
+        {
+            //if ((bool)System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] == false)
+            {
+                //System.Web.HttpContext.Current.Session["wasClosedQuestionPartialViewRendered"] = true;
+                return PartialView();
+            }
 
-        //    return null;
-        //}
+            //return null;
+        }
+
+        public ActionResult _ClosedQuestionAnswersPartial(int numberOfAnswers)
+        {
+            ViewBag.numberOfAnswers = numberOfAnswers;
+
+            return PartialView();
+        }
+
 
         // GET: Questions
         public ActionResult Index()

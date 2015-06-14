@@ -42,10 +42,9 @@
 
         </section>
 
-        <section id="ClosedQuestionPanel" style="visibility: hidden">
-            @Html.Partial("_ClosedQuestionPartial")
-        </section>
+        <section id="ClosedQuestionSection">
             
+        </section>
 
 
         <div class="form-group">
@@ -57,7 +56,6 @@
     </div>
 }
 
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -66,24 +64,42 @@
 @section Scripts
 {
     @*@Scripts.Render("~/bundles/jqueryval")*@
-    <script src="~/Scripts/Custom/ClosedQuestionAnswers.js"></script>
-    <script src="~/Scripts/Custom/QuestionCreateAnswersPanel.js"></script>
+    @*<script src="~/Scripts/Custom/ClosedQuestionAnswers.js"></script>*@
+    <script src="~/Scripts/Custom/ClosedQuestion.js"></script>
 }
 
 
+
+@* only in IE and Firefox *@
+@*<table id="ClosedQuestionTable" style="visibility: collapse">
+        <tbody>
+            <tr>
+                <td>
+                    <section>
+                        @Html.Partial("_ClosedQuestionPartial")
+                    </section>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>*@
+
+@*Ajax form cannot be inserted into "normal" form*@
+
 @*<div id="questionTypeDiv">
         @using (Ajax.BeginForm("_ClosedQuestionPartial",
-        new AjaxOptions
-        {
-            InsertionMode = InsertionMode.InsertAfter,
-            HttpMethod = "Post",
-            UpdateTargetId = "questionTypeDiv"
-        }))
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.InsertAfter,
+                    HttpMethod = "Post",
+                    UpdateTargetId = "questionTypeDiv"
+                }))
         {
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    @Html.RadioButton("QuestionType", "Open", new {id = "IsOpenRadioButton"}) Open
-                    @Html.RadioButton("QuestionType", "Closed", new {id = "IsClosedRadioButton"}) Closed
+                    @Html.RadioButton("QuestionType", "Open", new { id = "IsOpenRadioButton" }) Open
+                    @Html.RadioButton("QuestionType", "Closed", new { id = "IsClosedRadioButton" }) Closed
                 </div>
             </div>
 
