@@ -85,11 +85,25 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TimeToRespond,Text,Points")] Question question)
+        public ActionResult Create([Bind(Include = "ID,TimeToRespond,Text,Points,AnswerChoices")] ClosedQuestion question)
         {
             if (ModelState.IsValid)
             {
                 _questionsRepository.Add(question);
+
+
+                //closed question
+                if (question != null && question.AnswerChoices != null)
+                {
+                    foreach (var answerChoice in question.AnswerChoices)
+                    {
+                        answerChoice.ClosedQuestionID = question.ID;
+
+                        //_closedAnswersRepository.Add(answerChoice);
+                    }
+
+                }
+
 
                 return RedirectToAction("Index");
             }
@@ -141,13 +155,23 @@ namespace E_xam.MVCWebUI.Controllers
                 {
                     foreach (var answerChoice in question.AnswerChoices)
                     {
-                        _closedAnswersRepository.Update(answerChoice); 
+                        //added answer choice
+                        if (answerChoice.ID == 0)
+                        {
+                            answerChoice.ClosedQuestionID = question.ID;
+                            _closedAnswersRepository.Add(answerChoice);
+                        }
+                        //updated answer choice
+                        else
+                        {
+                            _closedAnswersRepository.Update(answerChoice); 
+                        }
+                        
                     }
                 }
 
                 _questionsRepository.Update(question);
 
-                //ViewBag.QuestionType = "OpenQuestion";
 
                 return View("Details", question);
             }

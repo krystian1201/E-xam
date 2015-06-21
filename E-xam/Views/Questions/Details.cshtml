@@ -40,7 +40,8 @@
     </dl>
 
 
-    @if ((Model as ClosedQuestion) != null && ((ClosedQuestion) Model).AnswerChoices != null)
+    @if ((Model as ClosedQuestion) != null && ((ClosedQuestion)Model).AnswerChoices != null
+        && ((ClosedQuestion)Model).AnswerChoices.Count != 0)
     {
         <table class="table">
             <tr>
@@ -58,10 +59,10 @@
 
 
     @*@if((Model as ClosedQuestion) != null)
-    {
-        @Html.Partial("_ClosedAnswersDetailsPartial", ((ClosedQuestion) Model).AnswerChoices)
-        
-    }*@
+        {
+            @Html.Partial("_ClosedAnswersDetailsPartial", ((ClosedQuestion) Model).AnswerChoices)
+
+        }*@
 
 </div>
 <p>

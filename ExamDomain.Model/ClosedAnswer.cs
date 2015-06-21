@@ -17,6 +17,7 @@ namespace ExamDomain.Model
         [Required]
         public string AnswerText { get; set; }
 
+        public bool ToBeDeleted { get; set; }
 
         public int ClosedQuestionID { get; set; }
 

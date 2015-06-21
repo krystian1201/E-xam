@@ -1,4 +1,5 @@
 ﻿@using ExamDomain.Model
+@using Utils.HtmlHelpers
 
 @model Question
 
@@ -12,7 +13,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Question</h4>
         <hr />
@@ -45,18 +46,18 @@
 
 
         @*@if (ViewBag.AnswerChoices != null)
-        {
-            @Html.Partial("_ClosedAnswersEditPartial", (List<ClosedAnswer>)ViewBag.AnswerChoices)
-        }*@
+            {
+                @Html.Partial("_ClosedAnswersEditPartial", (List<ClosedAnswer>)ViewBag.AnswerChoices)
+            }*@
 
 
         @if ((Model as ClosedQuestion) != null)
         {
             @*@Html.Partial("_ClosedAnswersEditPartial", ((ClosedQuestion)Model).AnswerChoices)*@
 
-
-
-            <table class="table">
+            @*class="col-md-offset-2 col-md-1"*@
+            <div class="form-group col-md-offset-2">
+                <table id="answerChoicesTable" class="table">
                 <tr>
                     <th style="text-align: center">
                         @Html.Label("Answer")
@@ -68,20 +69,28 @@
 
                 @Html.EditorFor(q => ((ClosedQuestion)q).AnswerChoices)
 
-            </table>  
+            </table>
+
+            <p>
+                @Html.CreateAddLink("Add answer", "#answerChoicesTable", ".answerChoice", "AnswerChoices",
+                            typeof(ClosedAnswer))
+            </p>
+
+            </div>
+
         }
 
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-1">
-                @Html.ActionLink("Cancel", "Details", "Questions", new { id = Model.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Cancel", "Details", "Questions", new {id = Model.ID}, new {@class = "btn btn-default"})
             </div>
             <div>
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </div>
 
-</div>
+    </div>
 
 }
 
@@ -91,4 +100,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Custom/ClosedQuestion.js"></script>
 }

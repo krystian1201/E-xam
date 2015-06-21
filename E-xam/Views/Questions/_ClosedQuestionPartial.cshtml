@@ -6,7 +6,9 @@
 </script>
 
 
-@model ExamDomain.Model.ClosedQuestion
+@using ExamDomain.Model
+@using Utils.HtmlHelpers
+@model ClosedQuestion
 
 
 <h4>Answers</h4>
@@ -15,7 +17,8 @@
 @*there should be just one validation summary for a form?*@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<div class="form-group" id="NumberOfAnswersDiv">
+
+@*<div class="form-group" id="NumberOfAnswersDiv">
     
     @Html.LabelFor(m => m.NumberOfAnswers, htmlAttributes: new {@class = "control-label col-md-2"})
 
@@ -27,7 +30,22 @@
 
 
 <div id="ClosedAnswersDiv">
-</div>
+</div>*@
 
 
+<table id="answerChoicesTable" class="table">
+    <tr>
+        <th style="text-align: center">
+            @Html.Label("Answer")
+        </th>
+        <th>
+            @Html.Label("IsCorrect")
+        </th>
+    </tr>
 
+    @*@Html.EditorFor(q => q.AnswerChoices)*@
+
+    @Html.CreateAddLink("Add answer", "#answerChoicesTable", ".answerChoice", "AnswerChoices",
+                        typeof(ClosedAnswer))
+
+</table>  

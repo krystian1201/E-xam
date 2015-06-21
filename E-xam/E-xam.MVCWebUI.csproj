@@ -208,6 +208,7 @@
     <Content Include="Views\Questions\_ClosedAnswersEditPartial.cshtml" />
     <Content Include="Views\Questions\EditorTemplates\ClosedAnswer.cshtml" />
     <Content Include="Views\Questions\DisplayTemplates\ClosedAnswer.cshtml" />
+    <Content Include="Views\Questions\EditorTemplates\Question.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -228,6 +229,10 @@
     <ProjectReference Include="..\Shared.Repository\Shared.Repository.csproj">
       <Project>{6302EBFE-3204-4194-AD20-856156B48C2B}</Project>
       <Name>Shared.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils.HtmlHelpers\Utils.HtmlHelpers.csproj">
+      <Project>{141D2131-ABCF-497F-9915-61E5827ECA75}</Project>
+      <Name>Utils.HtmlHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
