@@ -50,6 +50,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -198,7 +202,10 @@
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Questions\_ClosedQuestionPartial.cshtml" />
-    <Content Include="Views\Questions\_ClosedQuestionAnswersPartial.cshtml" />
+    <Content Include="Views\Questions\_ClosedAnswersCreatePartial.cshtml" />
+    <Content Include="Views\Questions\_ClosedAnswersDetailsPartial.cshtml" />
+    <Content Include="Views\Questions\ClosedQuestionDetails.cshtml" />
+    <Content Include="Views\Questions\_ClosedAnswersEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -215,6 +222,10 @@
     <ProjectReference Include="..\E-xam.MVCWebUI.Controllers\E-xam.MVCWebUI.Controllers.csproj">
       <Project>{f93e9197-e443-4d46-9785-181490b19f3e}</Project>
       <Name>E-xam.MVCWebUI.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared.Repository\Shared.Repository.csproj">
+      <Project>{6302EBFE-3204-4194-AD20-856156B48C2B}</Project>
+      <Name>Shared.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

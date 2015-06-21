@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ExamDomain.Model;
@@ -9,12 +10,13 @@ namespace E_xam.MVCWebUI.Controllers
     public class QuestionsController : Controller
     {
         
-        private readonly IRepository<Question> _repository;
+        private readonly IRepository<Question> _questionsRepository;
+        private readonly IRepository<ClosedAnswer> _closedAnswersRepository; 
 
         public QuestionsController()
         {
-            _repository = new Repository<Question>(new ApplicationDbContext());
-            
+            _questionsRepository = new Repository<Question>(new ApplicationDbContext());
+            _closedAnswersRepository = new Repository<ClosedAnswer>(new ApplicationDbContext());
         }
 
 
@@ -38,7 +40,7 @@ namespace E_xam.MVCWebUI.Controllers
         public ActionResult Index()
         {
             
-            return View(_repository.GetAll());
+            return View(_questionsRepository.GetAll());
         }
 
 
@@ -51,10 +53,19 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Question question = _repository.GetById(id.Value);
+            Question question = _questionsRepository.GetById(id.Value);
             if (question == null)
             {
                 return HttpNotFound();
+            }
+
+            if (question is ClosedQuestion)
+            {
+                ClosedQuestion closedQuestion = (ClosedQuestion) question;
+                
+                closedQuestion.AnswerChoices = _closedAnswersRepository.Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
+
+                return View("ClosedQuestionDetails", closedQuestion);
             }
 
             return View(question);
@@ -76,7 +87,7 @@ namespace E_xam.MVCWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Add(question);
+                _questionsRepository.Add(question);
 
                 return RedirectToAction("Index");
             }
@@ -93,12 +104,21 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Question question = _repository.GetById(id.Value);
+            Question question = _questionsRepository.GetById(id.Value);
 
             if (question == null)
             {
                 return HttpNotFound();
             }
+
+            if (question is ClosedQuestion)
+            {
+                ClosedQuestion closedQuestion = (ClosedQuestion) question;
+                closedQuestion.AnswerChoices = _closedAnswersRepository.Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
+
+                ViewBag.AnswerChoices = closedQuestion.AnswerChoices;
+            }
+
             return View(question);
         }
 
@@ -111,9 +131,9 @@ namespace E_xam.MVCWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(question);
+                _questionsRepository.Update(question);
 
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(question);
@@ -127,7 +147,7 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Question question = _repository.GetById(id.Value);
+            Question question = _questionsRepository.GetById(id.Value);
 
             if (question == null)
             {
@@ -142,14 +162,14 @@ namespace E_xam.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repository.Delete(id);
+            _questionsRepository.Delete(id);
 
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            _repository.Dispose();
+            _questionsRepository.Dispose();
             base.Dispose(disposing);
         }
 

@@ -1,6 +1,8 @@
-﻿@using ExamDomain.Model
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-@model ExamDomain.Model.Question
+@model ExamDomain.Model.ClosedQuestion
 
 @{
     ViewBag.Title = "Details";
@@ -40,11 +42,8 @@
 
     </dl>
 
-    @*@if(Model is ClosedQuestion)
-    {
-        
-        @Html.Partial("_ClosedAnswersDetailsPartial", (ClosedQuestion)Model.AnswerChoices);
-    }*@
+
+    @Html.Partial("_ClosedAnswersDetailsPartial", Model.AnswerChoices)
 
 </div>
 <p>

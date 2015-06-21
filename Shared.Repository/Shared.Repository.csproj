@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201506071117217_Question points from int to decimal.Designer.cs">
       <DependentUpon>201506071117217_Question points from int to decimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506201440129_MyMigration.cs" />
+    <Compile Include="Migrations\201506201440129_MyMigration.Designer.cs">
+      <DependentUpon>201506201440129_MyMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201505311703248_Seed db.cs" />
@@ -144,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506071117217_Question points from int to decimal.resx">
       <DependentUpon>201506071117217_Question points from int to decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506201440129_MyMigration.resx">
+      <DependentUpon>201506201440129_MyMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

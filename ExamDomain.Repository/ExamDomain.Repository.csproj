@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,12 @@
     <Compile Include="ExamSheetRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExamDomain.Model\ExamDomain.Model.csproj">
+      <Project>{F5AD11D3-4C54-4BF3-B0A0-A9FC0CF5ED21}</Project>
+      <Name>ExamDomain.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

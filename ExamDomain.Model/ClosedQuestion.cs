@@ -16,7 +16,7 @@ namespace ExamDomain.Model
         [DefaultValue(1)]
         [Range(1, 10)]
         [Display(Name = "Number of answers")]
-        public int NumberOfAnswers
+        public int? NumberOfAnswers
         {
             //get { return AnswerChoices.Count; } 
             //set { _numberOfAnswers = value; }

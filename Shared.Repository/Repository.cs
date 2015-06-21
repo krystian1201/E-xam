@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Shared.Repository
 {
-    public class Repository<T> : IDisposable, IRepository<T> where T: class
+    public class Repository<T> : IRepository<T> where T: class
     {
         private readonly DbContext _dbContext;
         private readonly IDbSet<T> _dbSet;
@@ -27,8 +27,27 @@ namespace Shared.Repository
 
         public virtual void AddRange(IEnumerable<T> entities)
         {
-            _dbSet.ToList().AddRange(entities);
 
+            foreach (var entity in entities)
+            {
+                _dbSet.Add(entity);
+            }
+        }
+
+        public virtual void DeleteAll()
+        {
+
+            foreach (var entity in _dbSet.ToList())
+            {
+                Delete(entity);
+            }
+
+        }
+
+        public virtual void Delete(T entity)
+        {
+            //var entry = _dbSet.Find(entity);
+            _dbSet.Remove(entity);
             _dbContext.SaveChanges();
         }
 
@@ -39,12 +58,6 @@ namespace Shared.Repository
 
             var entry = _dbSet.Find(id);
             _dbSet.Remove(entry);
-            _dbContext.SaveChanges();
-        }
-
-        public void DeleteAll()
-        {
-            _dbSet.ToList().RemoveAll(t => true);
             _dbContext.SaveChanges();
         }
 

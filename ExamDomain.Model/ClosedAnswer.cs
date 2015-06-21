@@ -16,5 +16,11 @@ namespace ExamDomain.Model
         [DisplayName("Answer")]
         [Required]
         public string AnswerText { get; set; }
+
+
+        public int ClosedQuestionID { get; set; }
+
+        //[Required]
+        public virtual ClosedQuestion ClosedQuestion { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model ExamDomain.Model.Question
+﻿@using ExamDomain.Model
+@model ExamDomain.Model.Question
 
 @{
     ViewBag.Title = "Edit";
@@ -40,6 +41,13 @@
                 @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
             </div>
         </div>
+
+
+        @if (ViewBag.AnswerChoices != null)
+        {
+            @Html.Partial("_ClosedAnswersEditPartial", (List<ClosedAnswer>)ViewBag.AnswerChoices)
+        }
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
