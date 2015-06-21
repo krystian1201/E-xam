@@ -4,18 +4,6 @@
 
 <table class="table">
 
-    @*<div class="form-group">
-
-            <div class="col-md-3">
-                @Html.DisplayFor(modelItem => item.AnswerText, v)
-                @Html.TextBoxFor(m => m.AnswerText, new {@class = "form-control"})
-            </div>
-
-            @Html.DisplayFor(modelItem => item.IsCorrect, new {htmlAttributes = new {@class = "form-control"}})
-
-        </div>*@
-
-
     <tr>
         <th>
             <div>
@@ -38,11 +26,6 @@
                 @Html.DisplayFor(modelItem => item.IsCorrect)
             </td>
 
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>*@
         </tr>
     }
 

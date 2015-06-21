@@ -206,6 +206,8 @@
     <Content Include="Views\Questions\_ClosedAnswersDetailsPartial.cshtml" />
     <Content Include="Views\Questions\ClosedQuestionDetails.cshtml" />
     <Content Include="Views\Questions\_ClosedAnswersEditPartial.cshtml" />
+    <Content Include="Views\Questions\EditorTemplates\ClosedAnswer.cshtml" />
+    <Content Include="Views\Questions\DisplayTemplates\ClosedAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

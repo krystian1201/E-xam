@@ -1,0 +1,28 @@
+﻿
+@model ExamDomain.Model.ClosedAnswer
+
+@*<div class="closedAnswer">
+    <p>
+        <label>Phone Number</label>
+       
+        @Html.EditorFor(a => a.AnswerText)
+        @Html.EditorFor(a => a.IsCorrect)
+        @Html.HiddenFor(x => x.DeletePhone, new { @class = "mark-for-delete" })
+    </p>
+</div>*@
+
+
+@Html.HiddenFor(a => a.ID)
+@Html.HiddenFor(a => a.ClosedQuestionID)
+
+<tr>
+    <td style="width: 20%">
+        @Html.EditorFor(a => a.AnswerText)
+    </td>
+    <td style="width: 20%">
+        @Html.EditorFor(a => a.IsCorrect)
+    </td>
+    <td style="width: 60%">
+        
+    </td>
+</tr>

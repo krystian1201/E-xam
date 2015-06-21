@@ -15,8 +15,10 @@ namespace E_xam.MVCWebUI.Controllers
 
         public QuestionsController()
         {
-            _questionsRepository = new Repository<Question>(new ApplicationDbContext());
-            _closedAnswersRepository = new Repository<ClosedAnswer>(new ApplicationDbContext());
+            var dbContext = new ApplicationDbContext();
+
+            _questionsRepository = new Repository<Question>(dbContext);
+            _closedAnswersRepository = new Repository<ClosedAnswer>(dbContext);
         }
 
 
@@ -59,13 +61,13 @@ namespace E_xam.MVCWebUI.Controllers
                 return HttpNotFound();
             }
 
-            if (question is ClosedQuestion)
+            ClosedQuestion closedQuestion = question as ClosedQuestion;
+            if (closedQuestion != null)
             {
-                ClosedQuestion closedQuestion = (ClosedQuestion) question;
-                
                 closedQuestion.AnswerChoices = _closedAnswersRepository.Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
 
-                return View("ClosedQuestionDetails", closedQuestion);
+                //return View("ClosedQuestionDetails", closedQuestion);
+                return View(closedQuestion);
             }
 
             return View(question);
@@ -111,12 +113,14 @@ namespace E_xam.MVCWebUI.Controllers
                 return HttpNotFound();
             }
 
-            if (question is ClosedQuestion)
+            ClosedQuestion closedQuestion = question as ClosedQuestion;
+            if (closedQuestion != null)
             {
-                ClosedQuestion closedQuestion = (ClosedQuestion) question;
                 closedQuestion.AnswerChoices = _closedAnswersRepository.Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
 
-                ViewBag.AnswerChoices = closedQuestion.AnswerChoices;
+                //ViewBag.AnswerChoices = closedQuestion.AnswerChoices;
+
+                return View(closedQuestion);    
             }
 
             return View(question);
@@ -127,13 +131,25 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeToRespond,Text,Points")] Question question)
+        public ActionResult Edit([Bind(Include = "ID,TimeToRespond,Text,Points,AnswerChoices")] ClosedQuestion question)
         {
             if (ModelState.IsValid)
             {
+
+                //ClosedQuestion question = justQuestion as ClosedQuestion;
+                if (question != null && question.AnswerChoices != null)
+                {
+                    foreach (var answerChoice in question.AnswerChoices)
+                    {
+                        _closedAnswersRepository.Update(answerChoice); 
+                    }
+                }
+
                 _questionsRepository.Update(question);
 
-                //return RedirectToAction("Index");
+                //ViewBag.QuestionType = "OpenQuestion";
+
+                return View("Details", question);
             }
 
             return View(question);

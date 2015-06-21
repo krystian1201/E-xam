@@ -1,12 +1,16 @@
 ﻿
 @model IEnumerable<ExamDomain.Model.ClosedAnswer>
+@*@model ExamDomain.Model.ClosedQuestion*@
 
+
+@*@Html.HiddenFor(model => model.AnswerChoices.GetType()*@
 
 <table class="table">
 
     <tr>
         <th>
             <div>
+                @*@Html.DisplayNameFor(model => model.AnswerChoices.FirstOrDefault().AnswerText)*@
                 @Html.DisplayNameFor(model => model.AnswerText)
             </div>
         </th>

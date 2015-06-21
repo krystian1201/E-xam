@@ -1,5 +1,6 @@
 ﻿@using ExamDomain.Model
-@model ExamDomain.Model.Question
+
+@model Question
 
 @{
     ViewBag.Title = "Edit";
@@ -43,18 +44,45 @@
         </div>
 
 
-        @if (ViewBag.AnswerChoices != null)
+        @*@if (ViewBag.AnswerChoices != null)
         {
             @Html.Partial("_ClosedAnswersEditPartial", (List<ClosedAnswer>)ViewBag.AnswerChoices)
+        }*@
+
+
+        @if ((Model as ClosedQuestion) != null)
+        {
+            @*@Html.Partial("_ClosedAnswersEditPartial", ((ClosedQuestion)Model).AnswerChoices)*@
+
+
+
+            <table class="table">
+                <tr>
+                    <th style="text-align: center">
+                        @Html.Label("Answer")
+                    </th>
+                    <th>
+                        @Html.Label("IsCorrect")
+                    </th>
+                </tr>
+
+                @Html.EditorFor(q => ((ClosedQuestion)q).AnswerChoices)
+
+            </table>  
         }
 
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-1">
+                @Html.ActionLink("Cancel", "Details", "Questions", new { id = Model.ID }, new { @class = "btn btn-default" })
+            </div>
+            <div>
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-    </div>
+
+</div>
+
 }
 
 <div>

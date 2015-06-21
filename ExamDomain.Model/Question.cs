@@ -19,6 +19,7 @@ namespace ExamDomain.Model
         public string Text { get; set; }
 
         [Required]
+        [Range(1, 100)]
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
