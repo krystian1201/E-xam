@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 using ExamDomain.Model;
 
 namespace Shared.Repository.Migrations
@@ -39,6 +40,50 @@ namespace Shared.Repository.Migrations
 
             //dbContext.Exams.AddRange(exams);
 
+            #region Courses
+
+            //IRepository<Course> coursesRepository = new Repository<Course>(dbContext);
+            //coursesRepository.DeleteAll();
+
+            var courses = new List<Course>
+            {
+                new Course
+                {
+                    Name = "Software System Development",
+                    ECTS = 5,
+                    Semester = 2
+                },
+                new Course
+                {
+                    Name = "Math",
+                    ECTS = 2,
+                    Semester = 1
+                },
+                new Course
+                {
+                    Name = "Physics",
+                    ECTS = 3,
+                    Semester = 3
+                },
+                new Course
+                {
+                    Name = "English B2",
+                    ECTS = 1,
+                    Semester = 1
+                },
+                new Course
+                {
+                    Name = "Computer Science",
+                    ECTS = 4,
+                    Semester = 1
+                }
+            };
+
+            //coursesRepository.AddRange(courses);
+
+
+            #endregion
+
 
             #region Exams
 
@@ -47,12 +92,42 @@ namespace Shared.Repository.Migrations
 
             var exams = new List<Exam>
             {
-                new Exam {Name = "Differential calculus", Date = new DateTime(2015, 6, 30), Duration = new TimeSpan(0, 1, 0, 0)},
-                new Exam {Name = "Math", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)},
-                new Exam {Name = "Physics", Date = new DateTime(2015, 5, 15), Duration = new TimeSpan(0, 0, 30, 0)},
-                new Exam {Name = "Software System Development", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)},
-                new Exam {Name = "Computer Science", Date = new DateTime(2015, 6, 23), Duration = new TimeSpan(0, 2, 30, 0)},
-                new Exam {Name = "English B2", Date = new DateTime(2015, 6, 24), Duration = new TimeSpan(0, 1, 15, 0)}
+                new Exam
+                {
+                    Name = "Differential calculus", Course = courses.FirstOrDefault(c => c.Name == "Math"),
+                    DateAndTime = new DateTime(2015, 6, 30, 15, 30, 0), Duration = new TimeSpan(0, 1, 0, 0),
+                    Place = "A1, 30"
+                },
+                new Exam
+                {
+                    Name = "Integrals", Course = courses.FirstOrDefault(c => c.Name == "Math"),
+                    DateAndTime = new DateTime(2015, 6, 15, 13, 0, 0), Duration = new TimeSpan(0, 1, 30, 0),
+                    Place = "D20, 105"
+                },
+                new Exam
+                {
+                    Name = "Exam 2", Course = courses.FirstOrDefault(c => c.Name == "Physics"),
+                    DateAndTime = new DateTime(2015, 5, 15, 12, 15, 0), Duration = new TimeSpan(0, 0, 30, 0),
+                    Place = "C3, 205"
+                },
+                new Exam
+                {
+                    Name = "Final Exam", Course = courses.FirstOrDefault(c => c.Name == "Software System Development"),
+                    DateAndTime = new DateTime(2015, 6, 15, 17, 5, 0), Duration = new TimeSpan(0, 1, 30, 0),
+                    Place = "C5, 301"
+                },
+                new Exam
+                {
+                    Name = "Exam 3", Course = courses.FirstOrDefault(c => c.Name == "Computer Science"), 
+                    DateAndTime = new DateTime(2015, 6, 23, 11, 0, 0), Duration = new TimeSpan(0, 2, 30, 0),
+                     Place = "C7, 501"
+                },
+                new Exam
+                {
+                    Name = "Vocabulary exam", Course = courses.FirstOrDefault(c => c.Name == "English B2"), 
+                    DateAndTime = new DateTime(2015, 6, 24, 9, 30, 0), Duration = new TimeSpan(0, 1, 15, 0),
+                     Place = "C13, 301"
+                }
             };
 
             
@@ -67,9 +142,6 @@ namespace Shared.Repository.Migrations
 
             IRepository<Question> questionsRepository = new Repository<Question>(dbContext);
             questionsRepository.DeleteAll();
-
-            //((System.Data.Entity.Validation.DbEntityValidationException)$exception).EntityValidationErrors
-
 
             ClosedQuestion closedQuestion1 = new ClosedQuestion
             {

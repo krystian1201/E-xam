@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using ExamDomain.Model;
@@ -19,7 +21,11 @@ namespace E_xam.MVCWebUI.Controllers
         //[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            return View(_repository.GetAll());
+            var exams = _repository.GetAll().ToList();
+
+            IEnumerable<ExamViewModel> examViewModels = exams.Select(exam => new ExamViewModel(exam)).ToList();
+           
+            return View(examViewModels);
         }
 
         // GET: Exams/Details/5

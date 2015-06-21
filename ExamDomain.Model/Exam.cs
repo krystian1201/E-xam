@@ -17,7 +17,7 @@ namespace ExamDomain.Model
         //TODO: another for time - does it influence model?
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         [DataType(DataType.Duration)]
         public TimeSpan Duration { get; set; }
