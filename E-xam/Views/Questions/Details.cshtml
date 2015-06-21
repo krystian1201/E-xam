@@ -3,24 +3,16 @@
 @model ExamDomain.Model.Question
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Question details";
 }
 
-<h2>Details about questions</h2>
-
+<h2>Question details</h2>
 
 
 <div>
-    <h4>Question</h4>
+    @*<h4>Question</h4>*@
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeToRespond)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeToRespond)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Text)
@@ -28,6 +20,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeToRespond)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeToRespond)
         </dd>
 
         <dt>

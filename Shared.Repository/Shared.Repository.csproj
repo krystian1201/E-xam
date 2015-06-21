@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201506201440129_MyMigration.Designer.cs">
       <DependentUpon>201506201440129_MyMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506211933042_DropClosedQuestionID.cs" />
+    <Compile Include="Migrations\201506211933042_DropClosedQuestionID.Designer.cs">
+      <DependentUpon>201506211933042_DropClosedQuestionID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201505311703248_Seed db.cs" />
@@ -151,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506201440129_MyMigration.resx">
       <DependentUpon>201506201440129_MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506211933042_DropClosedQuestionID.resx">
+      <DependentUpon>201506211933042_DropClosedQuestionID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

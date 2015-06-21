@@ -47,10 +47,12 @@ namespace Shared.Repository.Migrations
 
             var exams = new List<Exam>
             {
-                new Exam {ID = 0, Name = "Differential calculus", Date = new DateTime(2015, 6, 30), Duration = new TimeSpan(0, 1, 0, 0)},
-                new Exam {ID = 1, Name = "Math", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)},
-                new Exam {ID = 2, Name = "Physics", Date = new DateTime(2015, 5, 15), Duration = new TimeSpan(0, 0, 30, 0)},
-                new Exam {ID = 3, Name = "Software System Development", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)}
+                new Exam {Name = "Differential calculus", Date = new DateTime(2015, 6, 30), Duration = new TimeSpan(0, 1, 0, 0)},
+                new Exam {Name = "Math", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)},
+                new Exam {Name = "Physics", Date = new DateTime(2015, 5, 15), Duration = new TimeSpan(0, 0, 30, 0)},
+                new Exam {Name = "Software System Development", Date = new DateTime(2015, 6, 15), Duration = new TimeSpan(0, 1, 30, 0)},
+                new Exam {Name = "Computer Science", Date = new DateTime(2015, 6, 23), Duration = new TimeSpan(0, 2, 30, 0)},
+                new Exam {Name = "English B2", Date = new DateTime(2015, 6, 24), Duration = new TimeSpan(0, 1, 15, 0)}
             };
 
             
@@ -76,6 +78,13 @@ namespace Shared.Repository.Migrations
                 TimeToRespond = new TimeSpan(0, 0, 5, 0)
             };
 
+            ClosedQuestion closedQuestion2 = new ClosedQuestion
+            {
+                Points = 2,
+                Text = "What's your favorite city?",
+                TimeToRespond = new TimeSpan(0, 0, 5, 0)
+            };
+
             var questions = new List<Question>()
             {
                  new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
@@ -86,7 +95,8 @@ namespace Shared.Repository.Migrations
                     TimeToRespond = new TimeSpan(0, 0, 4, 0)},
                 new OpenQuestion {ID = 3, Points = 10, Text = "Where are you from?", 
                     TimeToRespond = new TimeSpan(0, 0, 5, 0)},
-                closedQuestion1
+                closedQuestion1,
+                closedQuestion2
 
             };
 
@@ -105,10 +115,21 @@ namespace Shared.Repository.Migrations
             {
                 new ClosedAnswer {AnswerText = "blue", IsCorrect = true, ClosedQuestionID = closedQuestion1.ID},
                 new ClosedAnswer {AnswerText = "red", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID},
-                new ClosedAnswer {AnswerText = "green", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID}
+                new ClosedAnswer {AnswerText = "green", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID},
+                new ClosedAnswer {AnswerText = "black", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID}
             };
 
             closedAnswerRepository.AddRange(colorAnswerChoices);
+
+            var cityAnswerChoices = new List<ClosedAnswer>
+            {
+                new ClosedAnswer{AnswerText = "Wroclaw", IsCorrect = true, ClosedQuestionID = closedQuestion2.ID},
+                new ClosedAnswer{AnswerText = "London", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID},
+                new ClosedAnswer{AnswerText = "New York", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID}
+            };
+
+            closedAnswerRepository.AddRange(cityAnswerChoices);
+            
 
             #endregion
 

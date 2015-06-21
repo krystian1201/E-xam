@@ -34,6 +34,8 @@ namespace Shared.Repository
             }
         }
 
+       
+
         public virtual void DeleteAll()
         {
 
@@ -44,9 +46,20 @@ namespace Shared.Repository
 
         }
 
+        public virtual void DeleteWhere(Expression<Func<T, bool>> predicate)
+        {
+            var itemsToRemove = _dbSet.Where(predicate).ToList();
+
+            foreach (var item in itemsToRemove)
+            {
+                Delete(item);
+            }
+        }
+
         public virtual void Delete(T entity)
         {
             //var entry = _dbSet.Find(entity);
+            _dbSet.Attach(entity);
             _dbSet.Remove(entity);
             _dbContext.SaveChanges();
         }
@@ -60,6 +73,8 @@ namespace Shared.Repository
             _dbSet.Remove(entry);
             _dbContext.SaveChanges();
         }
+
+        
 
         public virtual void Update(T entity)
         {

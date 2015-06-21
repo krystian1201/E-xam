@@ -36,9 +36,14 @@ namespace Shared.Repository
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ClosedAnswer>()
-                .HasOptional(a => a.ClosedQuestion)
-                .WithOptionalDependent()
+                .HasRequired(a => a.ClosedQuestion)
+                .WithMany(q => q.AnswerChoices)
+                .HasForeignKey(a => a.ClosedQuestionID)
                 .WillCascadeOnDelete(true);
+                //.HasMany(q => q.AnswerChoices)
+                //.HasOptional(q => q.AnswerChoices)
+                //.WithOptionalDependent()
+                //.WillCascadeOnDelete(true);
 
 
             //modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);

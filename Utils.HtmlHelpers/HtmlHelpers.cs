@@ -42,7 +42,10 @@ namespace Utils.HtmlHelpers
             TagBuilder tb = new TagBuilder("a");
             tb.Attributes.Add("href", "#");
             tb.Attributes.Add("onclick", js);
+            //tb.Attributes.Add("style", "padding-bottom: 20px");
+            tb.AddCssClass("btn btn-default");
             tb.InnerHtml = linkText;
+            
             var tag = tb.ToString(TagRenderMode.Normal);
 
             return MvcHtmlString.Create(tag);

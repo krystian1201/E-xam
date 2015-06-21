@@ -98,12 +98,9 @@ namespace E_xam.MVCWebUI.Controllers
                     foreach (var answerChoice in question.AnswerChoices)
                     {
                         answerChoice.ClosedQuestionID = question.ID;
-
-                        //_closedAnswersRepository.Add(answerChoice);
                     }
 
                 }
-
 
                 return RedirectToAction("Index");
             }
@@ -155,23 +152,30 @@ namespace E_xam.MVCWebUI.Controllers
                 {
                     foreach (var answerChoice in question.AnswerChoices)
                     {
-                        //added answer choice
-                        if (answerChoice.ID == 0)
+                        if (answerChoice.ToBeDeleted)
                         {
-                            answerChoice.ClosedQuestionID = question.ID;
+                            _closedAnswersRepository.Delete(answerChoice);
+                        }
+                        //added answer choice
+                        else if(answerChoice.ID == 0)
+                        {
+                             answerChoice.ClosedQuestionID = question.ID;
                             _closedAnswersRepository.Add(answerChoice);
                         }
                         //updated answer choice
                         else
                         {
                             _closedAnswersRepository.Update(answerChoice); 
-                        }
-                        
+                        }   
                     }
                 }
 
                 _questionsRepository.Update(question);
 
+                //some answer choices may have been removed so
+                //need to be "refreshed" from db
+                question.AnswerChoices = 
+                    _closedAnswersRepository.Find(a => a.ClosedQuestionID == question.ID).ToList();
 
                 return View("Details", question);
             }
@@ -194,6 +198,15 @@ namespace E_xam.MVCWebUI.Controllers
                 return HttpNotFound();
             }
 
+            ClosedQuestion closedQuestion = question as ClosedQuestion;
+            if (closedQuestion != null)
+            {
+                closedQuestion.AnswerChoices = _closedAnswersRepository.Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
+
+                //return View("ClosedQuestionDetails", closedQuestion);
+                return View(closedQuestion);
+            }
+
             return View(question);
         }
 
@@ -202,7 +215,11 @@ namespace E_xam.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+            //ClosedQuestion question = _questionsRepository.GetById(id)
+
             _questionsRepository.Delete(id);
+            _closedAnswersRepository.DeleteWhere(a => a.ClosedQuestionID == id);
 
             return RedirectToAction("Index");
         }
