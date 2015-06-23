@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using ExamDomain.Model;
 using Shared.Repository;
 
+
 namespace E_xam.MVCWebUI.Controllers
 {
     public class ExamsController : Controller
@@ -75,6 +76,7 @@ namespace E_xam.MVCWebUI.Controllers
             return View(examViewModel);
         }
 
+
         // POST: Exams/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -118,6 +120,7 @@ namespace E_xam.MVCWebUI.Controllers
             return View(examViewModel);
         }
 
+
         // POST: Exams/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -139,6 +142,7 @@ namespace E_xam.MVCWebUI.Controllers
             return View(examViewModel);
         }
 
+
         // GET: Exams/Delete/5
         [HttpGet]
         public ActionResult Delete(int? id)
@@ -154,8 +158,11 @@ namespace E_xam.MVCWebUI.Controllers
                 return HttpNotFound();
             }
 
-            return View(exam);
+            var examViewModel = new ExamViewModel(exam);
+
+            return View(examViewModel);
         }
+
 
         // POST: Exams/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -170,6 +177,8 @@ namespace E_xam.MVCWebUI.Controllers
         protected override void Dispose(bool disposing)
         {
             _examsRepository.Dispose();
+            _coursesRepository.Dispose();
+
             base.Dispose(disposing);
         }
     }

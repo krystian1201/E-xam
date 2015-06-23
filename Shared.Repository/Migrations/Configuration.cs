@@ -74,6 +74,18 @@ namespace Shared.Repository.Migrations
                     Name = "Computer Science",
                     ECTS = 4,
                     Semester = 1
+                },
+                new Course
+                {
+                    Name = "Modelling and Analysis of Web",
+                    ECTS = 2,
+                    Semester = 2
+                },
+                new Course
+                {
+                    Name = "Foundation of Knowledge Engineering",
+                    ECTS = 3,
+                    Semester = 2
                 }
             };
 
@@ -125,6 +137,24 @@ namespace Shared.Repository.Migrations
                     Name = "Vocabulary exam", Course = courses.FirstOrDefault(c => c.Name == "English B2"), 
                     DateAndTime = new DateTime(2015, 6, 24, 9, 30, 0), Duration = new TimeSpan(0, 1, 15, 0),
                      Place = "C13, 301"
+                },
+                new Exam
+                {
+                    Name = "Grammar exam", Course = courses.FirstOrDefault(c => c.Name == "English B2"), 
+                    DateAndTime = new DateTime(2015, 6, 25, 11, 15, 0), Duration = new TimeSpan(0, 1, 0, 0),
+                    Place = "C13, 301"
+                },
+                new Exam
+                {
+                    Name = "Quantum physics", Course = courses.FirstOrDefault(c => c.Name == "Physics"), 
+                    DateAndTime = new DateTime(2015, 6, 25, 13, 15, 0), Duration = new TimeSpan(0, 2, 0, 0),
+                    Place = "C1, 205"
+                },
+                new Exam
+                {
+                    Name = "Algebra", Course = courses.FirstOrDefault(c => c.Name == "Math"), 
+                    DateAndTime = new DateTime(2015, 7, 5, 13, 15, 0), Duration = new TimeSpan(0, 2, 30, 0),
+                    Place = "D1, 200"
                 }
             };
 
@@ -141,14 +171,14 @@ namespace Shared.Repository.Migrations
             IRepository<Question> questionsRepository = new Repository<Question>(dbContext);
             questionsRepository.DeleteAll();
 
-            ClosedQuestion closedQuestion1 = new ClosedQuestion
+            var closedQuestion1 = new ClosedQuestion
             {
                 Points = 5,
                 Text = "What's your favorite color?",
                 TimeToRespond = new TimeSpan(0, 0, 5, 0)
             };
 
-            ClosedQuestion closedQuestion2 = new ClosedQuestion
+            var closedQuestion2 = new ClosedQuestion
             {
                 Points = 2,
                 Text = "What's your favorite city?",
@@ -163,7 +193,9 @@ namespace Shared.Repository.Migrations
                     TimeToRespond = new TimeSpan(0, 0, 2, 0)},
                  new OpenQuestion {Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
                     TimeToRespond = new TimeSpan(0, 0, 4, 0)},
-                new OpenQuestion {ID = 3, Points = 10, Text = "Where are you from?", 
+                new OpenQuestion {Points = 10, Text = "Where are you from?", 
+                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                new OpenQuestion {Points = 10, Text = "When ?", 
                     TimeToRespond = new TimeSpan(0, 0, 5, 0)},
                 closedQuestion1,
                 closedQuestion2
