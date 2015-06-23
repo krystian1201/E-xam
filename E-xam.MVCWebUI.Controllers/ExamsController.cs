@@ -11,20 +11,24 @@ namespace E_xam.MVCWebUI.Controllers
 {
     public class ExamsController : Controller
     {
-        private readonly IRepository<Exam> _repository;
-
-        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext();
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IRepository<Exam> _examsRepository;
+        private readonly IRepository<Course> _coursesRepository;
+        
 
         public ExamsController()
         {
-            _repository = new Repository<Exam>(_dbContext);
+            _dbContext = new ApplicationDbContext();
+
+            _examsRepository = new Repository<Exam>(_dbContext);
+            _coursesRepository = new Repository<Course>(_dbContext);
         }
 
         // GET: Exams
         //[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var exams = _repository.GetAll().ToList();
+            var exams = _examsRepository.GetAll().ToList();
 
             IEnumerable<ExamViewModel> examViewModels = exams.Select(exam => new ExamViewModel(exam)).ToList();
            
@@ -40,20 +44,23 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Exam exam = _repository.GetById(id.Value);
+            var exam = _examsRepository.GetById(id.Value);
+
             if (exam == null)
             {
                 return HttpNotFound();
             }
 
-            return View(exam);
+            exam.Course = _coursesRepository.GetById(exam.CourseID);
+            var examViewModel = new ExamViewModel(exam);
+
+            return View(examViewModel);
         }
 
 
         // GET: Exams/Create
         public ActionResult Create()
         {
-            var coursesRepository = new Repository<Course>(_dbContext);
 
             var examViewModel = new ExamViewModel
             {
@@ -61,7 +68,7 @@ namespace E_xam.MVCWebUI.Controllers
                 Time = DateTime.Now.TimeOfDay,
                 Duration = new TimeSpan(1, 0, 0),
                 AvailableCourses =
-                    coursesRepository.GetAll().ToDictionary(c => c.ID, c => c.Name)
+                    _coursesRepository.GetAll().ToDictionary(c => c.ID, c => c.Name)
             };
 
 
@@ -79,18 +86,14 @@ namespace E_xam.MVCWebUI.Controllers
             {
                 var exam = new Exam(examViewModel);
 
-                //exam.DateAndTime = new DateTime(examViewModel.Date.Year,
-                //    examViewModel.Date.Month, examViewModel.Date.Day, 
-                //    examViewModel.Time.Hours, examViewModel.Time.Minutes,
-                //    examViewModel.Time.Seconds);
-
-                _repository.Add(exam);
+                _examsRepository.Add(exam);
 
                 return RedirectToAction("Index");
             }
 
             return View(examViewModel);
         }
+
 
         // GET: Exams/Edit/5
         public ActionResult Edit(int? id)
@@ -100,13 +103,19 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Exam exam = _repository.GetById(id.Value);
+            var exam = _examsRepository.GetById(id.Value);
+            
             if (exam == null)
             {
                 return HttpNotFound();
             }
 
-            return View(exam);
+            var examViewModel = new ExamViewModel(exam)
+            {
+                AvailableCourses = _coursesRepository.GetAll().ToDictionary(c => c.ID, c => c.Name)
+            };
+
+            return View(examViewModel);
         }
 
         // POST: Exams/Edit/5
@@ -114,16 +123,20 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Date,Duration")] Exam exam)
+        public ActionResult Edit([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place")] ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(exam);
+                var exam = new Exam(examViewModel);
 
-                return RedirectToAction("Index");
+                _examsRepository.Update(exam);
+
+                examViewModel.Course = _coursesRepository.GetById(exam.CourseID);
+
+                return View("Details", examViewModel);
             }
 
-            return View(exam);
+            return View(examViewModel);
         }
 
         // GET: Exams/Delete/5
@@ -135,7 +148,7 @@ namespace E_xam.MVCWebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Exam exam = _repository.GetById(id.Value);
+            Exam exam = _examsRepository.GetById(id.Value);
             if (exam == null)
             {
                 return HttpNotFound();
@@ -149,14 +162,14 @@ namespace E_xam.MVCWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repository.Delete(id);
+            _examsRepository.Delete(id);
 
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            _repository.Dispose();
+            _examsRepository.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -1,20 +1,21 @@
-﻿@model ExamDomain.Model.Exam
+﻿@model ExamDomain.Model.ExamViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit exam";
 }
 
-<h2>Edit</h2>
+<h2>Edit exam</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Exam</h4>
+        @*<h4>Exam</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
@@ -26,10 +27,29 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateAndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Course.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DateAndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateAndTime, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.CourseID, new SelectList(Model.AvailableCourses, "Key", "Value", Model.CourseID),
+                    new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.ValidationMessageFor(model => model.Course.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -41,8 +61,21 @@
             </div>
         </div>
 
+
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            @Html.LabelFor(model => model.Place, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-1">
+                @Html.ActionLink("Cancel", "Details", "Exams", new { id = Model.ID }, new { @class = "btn btn-default" })
+            </div>
+            <div>
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>

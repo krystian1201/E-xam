@@ -48,6 +48,7 @@ namespace ExamDomain.Model
 
         public ExamViewModel(Exam exam)
         {
+            ID = exam.ID;
             Name = exam.Name;
             Date = exam.DateAndTime.Date;
             Time = exam.DateAndTime.TimeOfDay;
@@ -55,6 +56,7 @@ namespace ExamDomain.Model
             Place = exam.Place;
             Questions = exam.Questions;
             Course = exam.Course;
+            CourseID = exam.CourseID;
         }
 
 
