@@ -33,17 +33,15 @@ namespace Shared.Repository.Migrations
 
             //dbContext.SaveChanges();
 
-            //foreach (var exam in dbContext.Exams)
-            //{
-            //    examsRepository.Delete(exam.ID);
-            //}
-
-            //dbContext.Exams.AddRange(exams);
+            
 
             #region Courses
 
-            //IRepository<Course> coursesRepository = new Repository<Course>(dbContext);
-            //coursesRepository.DeleteAll();
+            IRepository<Exam> examsRepository = new Repository<Exam>(dbContext);
+            examsRepository.DeleteAll();
+
+            IRepository<Course> coursesRepository = new Repository<Course>(dbContext);
+            coursesRepository.DeleteAll();
 
             var courses = new List<Course>
             {
@@ -79,7 +77,7 @@ namespace Shared.Repository.Migrations
                 }
             };
 
-            //coursesRepository.AddRange(courses);
+            coursesRepository.AddRange(courses);
 
 
             #endregion
@@ -87,8 +85,8 @@ namespace Shared.Repository.Migrations
 
             #region Exams
 
-            IRepository<Exam> examsRepository = new Repository<Exam>(dbContext);
-            examsRepository.DeleteAll();
+            //IRepository<Exam> examsRepository = new Repository<Exam>(dbContext);
+            //examsRepository.DeleteAll();
 
             var exams = new List<Exam>
             {

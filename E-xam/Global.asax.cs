@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using System.Data.Entity;
+using System.Globalization;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,5 +22,12 @@ namespace E_xam
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //it seems not to change anything
+        protected void Application_PreRequestHandlerExecute()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
+        }
+
     }
 }

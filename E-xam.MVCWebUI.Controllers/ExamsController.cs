@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,9 +13,11 @@ namespace E_xam.MVCWebUI.Controllers
     {
         private readonly IRepository<Exam> _repository;
 
+        private readonly ApplicationDbContext _dbContext = new ApplicationDbContext();
+
         public ExamsController()
         {
-            _repository = new Repository<Exam>(new ApplicationDbContext());
+            _repository = new Repository<Exam>(_dbContext);
         }
 
         // GET: Exams
@@ -27,6 +30,7 @@ namespace E_xam.MVCWebUI.Controllers
            
             return View(examViewModels);
         }
+
 
         // GET: Exams/Details/5
         public ActionResult Details(int? id)
@@ -45,10 +49,23 @@ namespace E_xam.MVCWebUI.Controllers
             return View(exam);
         }
 
+
         // GET: Exams/Create
         public ActionResult Create()
         {
-            return View();
+            var coursesRepository = new Repository<Course>(_dbContext);
+
+            var examViewModel = new ExamViewModel
+            {
+                Date = DateTime.Now,
+                Time = DateTime.Now.TimeOfDay,
+                Duration = new TimeSpan(1, 0, 0),
+                AvailableCourses =
+                    coursesRepository.GetAll().ToDictionary(c => c.ID, c => c.Name)
+            };
+
+
+            return View(examViewModel);
         }
 
         // POST: Exams/Create
@@ -56,16 +73,23 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Date,Duration")] Exam exam)
+        public ActionResult Create([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place")] ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
             {
+                var exam = new Exam(examViewModel);
+
+                //exam.DateAndTime = new DateTime(examViewModel.Date.Year,
+                //    examViewModel.Date.Month, examViewModel.Date.Day, 
+                //    examViewModel.Time.Hours, examViewModel.Time.Minutes,
+                //    examViewModel.Time.Seconds);
+
                 _repository.Add(exam);
 
                 return RedirectToAction("Index");
             }
 
-            return View(exam);
+            return View(examViewModel);
         }
 
         // GET: Exams/Edit/5
