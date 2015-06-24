@@ -28,7 +28,6 @@ namespace ExamDomain.Model
 
         public virtual List<Question> Questions { get; set; }
 
-        //public int CourseID { get; set; }
         public virtual Course Course { get; set; }
 
         public int CourseID { get; set; }
@@ -43,17 +42,22 @@ namespace ExamDomain.Model
             ID = examViewModel.ID;
             Name = examViewModel.Name;
 
-            //var zeroDateTime = new DateTime(0, 0, 0);
+            
             DateAndTime = new DateTime(examViewModel.Date.Year, examViewModel.Date.Month, examViewModel.Date.Day,
                 examViewModel.Time.Hours, examViewModel.Time.Minutes, examViewModel.Time.Seconds);
-                //);
-                //zeroDateTime.AddYears(examViewModel.Date.Year)
-                //    .AddMonths(examViewModel.Date.Month)
-                //    .AddDays(examViewModel.Date.Day);
+               
 
             Duration = examViewModel.Duration;
             Place = examViewModel.Place;
-            Questions = examViewModel.Questions;
+
+            //Questions = examViewModel.Questions;
+            Questions = new List<Question>();
+
+            foreach (var questionViewModel in examViewModel.QuestionViewModels)
+            {
+                Questions.Add(new Question(questionViewModel));
+            }
+
             CourseID = examViewModel.CourseID;
         }
     }

@@ -57,22 +57,22 @@
 
             <div class="form-group col-md-offset-2">
                 <table id="answerChoicesTable" class="table">
-                <tr>
-                    <th style="text-align: center">
-                        @Html.Label("Answer")
-                    </th>
-                    <th>
-                        @Html.Label("IsCorrect")
-                    </th>
-                </tr>
+                    <tr>
+                        <th style="text-align: center">
+                            @Html.Label("Answer")
+                        </th>
+                        <th>
+                            @Html.Label("IsCorrect")
+                        </th>
+                    </tr>
 
-                @Html.EditorFor(q => ((ClosedQuestion)q).AnswerChoices)
+                    @Html.EditorFor(q => ((ClosedQuestion)q).AnswerChoices)
 
                 </table>
 
                 <p>
                     @Html.CreateAddLink("Add answer", "#answerChoicesTable", ".answerChoice", "AnswerChoices",
-                                typeof(ClosedAnswer))
+                             typeof(ClosedAnswer), "ClosedAnswer")
                 </p>
             </div>
 
@@ -96,7 +96,9 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section Scripts 
+{
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Custom/AddAndRemoveNestedForm.js"></script>
     <script src="~/Scripts/Custom/ClosedQuestion.js"></script>
 }

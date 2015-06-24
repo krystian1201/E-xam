@@ -37,6 +37,9 @@ namespace Shared.Repository.Migrations
 
             #region Courses
 
+            IRepository<Question> questionsRepository = new Repository<Question>(dbContext);
+            questionsRepository.DeleteAll();
+
             IRepository<Exam> examsRepository = new Repository<Exam>(dbContext);
             examsRepository.DeleteAll();
 
@@ -94,6 +97,51 @@ namespace Shared.Repository.Migrations
 
             #endregion
 
+            //--------------------------------------------------------------------------------------------------------------------------
+
+            #region Questions
+
+            
+
+            var closedQuestion1 = new ClosedQuestion
+            {
+                Points = 5,
+                Text = "What's your favorite color?",
+                TimeToRespond = new TimeSpan(0, 0, 5, 0)
+            };
+
+            var closedQuestion2 = new ClosedQuestion
+            {
+                Points = 2,
+                Text = "What's your favorite city?",
+                TimeToRespond = new TimeSpan(0, 0, 5, 0)
+            };
+
+            var questions = new List<Question>()
+            {
+                 new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
+                 new OpenQuestion {Exam = null, ID = 1, Points = 3, Text = "How are you?", 
+                    TimeToRespond = new TimeSpan(0, 0, 2, 0)},
+                 new OpenQuestion {Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
+                    TimeToRespond = new TimeSpan(0, 0, 4, 0)},
+                new OpenQuestion {Points = 10, Text = "Where are you from?", 
+                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                new OpenQuestion {Points = 10, Text = "When is your birthday?", 
+                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                new OpenQuestion {Points = 10, Text = "Your mother maiden name?", 
+                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                closedQuestion1,
+                closedQuestion2
+
+            };
+
+            questionsRepository.AddRange(questions);
+
+            #endregion
+
+
+            //--------------------------------------------------------------------------------------------------------------------------
 
             #region Exams
 
@@ -106,7 +154,7 @@ namespace Shared.Repository.Migrations
                 {
                     Name = "Differential calculus", Course = courses.FirstOrDefault(c => c.Name == "Math"),
                     DateAndTime = new DateTime(2015, 6, 30, 15, 30, 0), Duration = new TimeSpan(0, 1, 0, 0),
-                    Place = "A1, 30"
+                    Place = "A1, 30", Questions = questions
                 },
                 new Exam
                 {
@@ -164,50 +212,7 @@ namespace Shared.Repository.Migrations
             #endregion
 
 
-            //--------------------------------------------------------------------------------------------------------------------------
-
-            #region Questions
-
-            IRepository<Question> questionsRepository = new Repository<Question>(dbContext);
-            questionsRepository.DeleteAll();
-
-            var closedQuestion1 = new ClosedQuestion
-            {
-                Points = 5,
-                Text = "What's your favorite color?",
-                TimeToRespond = new TimeSpan(0, 0, 5, 0)
-            };
-
-            var closedQuestion2 = new ClosedQuestion
-            {
-                Points = 2,
-                Text = "What's your favorite city?",
-                TimeToRespond = new TimeSpan(0, 0, 5, 0)
-            };
-
-            var questions = new List<Question>()
-            {
-                 new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
-                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
-                 new OpenQuestion {Exam = null, ID = 1, Points = 3, Text = "How are you?", 
-                    TimeToRespond = new TimeSpan(0, 0, 2, 0)},
-                 new OpenQuestion {Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
-                    TimeToRespond = new TimeSpan(0, 0, 4, 0)},
-                new OpenQuestion {Points = 10, Text = "Where are you from?", 
-                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
-                new OpenQuestion {Points = 10, Text = "When ?", 
-                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
-                closedQuestion1,
-                closedQuestion2
-
-            };
-
-            questionsRepository.AddRange(questions);
-
-            #endregion
-
-
-            //--------------------------------------------------------------------------------------------------------------------------
+            
             #region ClosedAnswer
 
             IRepository<ClosedAnswer> closedAnswerRepository = new Repository<ClosedAnswer>(dbContext);

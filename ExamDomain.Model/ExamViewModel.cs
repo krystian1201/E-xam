@@ -29,8 +29,8 @@ namespace ExamDomain.Model
         //Place is an optional field
         public string Place { get; set; }
 
-        public virtual List<Question> Questions { get; set; }
-
+        //public virtual List<Question> Questions { get; set; }
+        public virtual List<QuestionInExamViewModel> QuestionViewModels { get; set; }
 
         public int CourseID { get; set; }
         public virtual Course Course { get; set; }
@@ -54,8 +54,14 @@ namespace ExamDomain.Model
             Time = exam.DateAndTime.TimeOfDay;
             Duration = exam.Duration;
             Place = exam.Place;
-            Questions = exam.Questions;
-            Course = exam.Course;
+            QuestionViewModels = new List<QuestionInExamViewModel>();
+
+            foreach (var question in exam.Questions)
+            {
+                QuestionViewModels.Add(new QuestionInExamViewModel(question));
+            }
+
+            Course = new Course(exam.Course); 
             CourseID = exam.CourseID;
         }
 

@@ -1,10 +1,14 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ExamDomain.Model
 {
-    public class Question
+    public class QuestionInExamViewModel
     {
         public int ID { get; set; }
 
@@ -23,22 +27,17 @@ namespace ExamDomain.Model
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
-        //public int ExamID { get; set; }
-        public virtual Exam Exam { get; set; }
+        public int ExamID { get; set; }
 
-        public Question()
-        {
-            
-        }
 
-        public Question(QuestionInExamViewModel questionInExamViewModel)
+        public QuestionInExamViewModel(Question question)
         {
-            ID = questionInExamViewModel.ID;
-            TimeToRespond = questionInExamViewModel.TimeToRespond;
-            Text = questionInExamViewModel.Text;
-            Points = questionInExamViewModel.Points;
-            //Exam = questionInExamViewModel.ExamID;
+            ID = question.ID;
+            TimeToRespond = question.TimeToRespond;
+            Text = question.Text;
+            Points = question.Points;
+            ExamID = question.Exam.ID;
+
         }
-        
     }
 }

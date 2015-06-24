@@ -1,4 +1,6 @@
-﻿@model ExamDomain.Model.ExamViewModel
+﻿@using ExamDomain.Model
+@using Utils.HtmlHelpers
+@model ExamDomain.Model.ExamViewModel
 
 @{
     ViewBag.Title = "Create exam";
@@ -70,6 +72,34 @@
                 @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        
+        <div class="form-group col-md-offset-2">
+            <table id="questionsTable" class="table">
+                <tr>
+                    <th style="text-align: center">
+                        @Html.Label("Question")
+                    </th>
+                    <th>
+                        @Html.Label("Time")
+                    </th>
+                    <th>
+                        @Html.Label("Points")
+                    </th>
+                    <th>
+                        @Html.Label("Type")
+                    </th>
+                </tr>
+
+            </table>
+
+            <p>
+                @Html.CreateAddLink("Add question", "#questionsTable", ".question", "Questions",
+                    typeof(Question), "QuestionInExam")
+                
+            </p>
+        </div>
+
 
 
         <div class="form-group">
@@ -86,4 +116,7 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Custom/AddAndRemoveNestedForm.js"></script>
+    <script src="~/Scripts/Custom/AddQuestionToExam.js"></script>
+
 }

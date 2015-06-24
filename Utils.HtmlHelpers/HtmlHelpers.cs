@@ -29,12 +29,12 @@ namespace Utils.HtmlHelpers
 
 
         public static IHtmlString CreateAddLink<TModel>(this HtmlHelper<TModel> htmlHelper, string linkText, string containerElement, 
-            string counterElement, string collectionProperty, Type nestedType)
+            string counterElement, string collectionProperty, Type nestedType, string editorForTemplateName)
         {
             var ticks = DateTime.UtcNow.Ticks;
             var nestedObject = Activator.CreateInstance(nestedType);
 
-            var partial = htmlHelper.EditorFor(x => nestedObject).ToHtmlString().JsEncode();
+            var partial = htmlHelper.EditorFor(x => nestedObject, editorForTemplateName).ToHtmlString().JsEncode();
             partial = partial.Replace("id=\\\"nestedObject", "id=\\\"" + collectionProperty + "_" + ticks + "_");
             partial = partial.Replace("name=\\\"nestedObject", "name=\\\"" + collectionProperty + "[" + ticks + "]");
             var js = string.Format("javascript:addNestedForm('{0}','{1}','{2}','{3}');return false;", containerElement, counterElement, ticks, partial);

@@ -132,6 +132,8 @@
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\AddAndRemoveNestedForm.js" />
+    <Content Include="Scripts\Custom\AddQuestionToExam.js" />
     <Content Include="Scripts\Custom\ClosedQuestion.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -208,6 +210,7 @@
     <Content Include="Views\Questions\_ClosedAnswersEditPartial.cshtml" />
     <Content Include="Views\Questions\EditorTemplates\ClosedAnswer.cshtml" />
     <Content Include="Views\Questions\DisplayTemplates\ClosedAnswer.cshtml" />
+    <Content Include="Views\Questions\EditorTemplates\QuestionInExamViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
