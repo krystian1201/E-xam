@@ -126,11 +126,11 @@ namespace Shared.Repository.Migrations
 
             var questions = new List<Question>()
             {
-                 new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
+                 new OpenQuestion {Points = 2, Text = "What's your name?", 
                     TimeToRespond = new TimeSpan(0, 0, 1, 0)},
-                 new OpenQuestion {Exam = null, ID = 1, Points = 3, Text = "How are you?", 
+                 new OpenQuestion {Points = 3, Text = "How are you?", 
                     TimeToRespond = new TimeSpan(0, 0, 2, 0)},
-                 new OpenQuestion {Exam = null, ID = 2, Points = 1, Text = "How old are you?", 
+                 new OpenQuestion {Points = 1, Text = "How old are you?", 
                     TimeToRespond = new TimeSpan(0, 0, 4, 0)},
                 new OpenQuestion {Points = 10, Text = "Where are you from?", 
                     TimeToRespond = new TimeSpan(0, 0, 5, 0)},
@@ -168,22 +168,20 @@ namespace Shared.Repository.Migrations
 
             #region Exams
 
-            //IRepository<Exam> examsRepository = new Repository<Exam>(dbContext);
-            //examsRepository.DeleteAll();
-
+           
             var exams = new List<Exam>
             {
                 new Exam
                 {
                     Name = "Differential calculus", Course = courses.FirstOrDefault(c => c.Name == "Math"),
                     DateAndTime = new DateTime(2015, 6, 30, 15, 30, 0), Duration = new TimeSpan(0, 1, 0, 0),
-                    Place = "A1, 30", Questions = questions
+                    Place = "A1, 30", Questions = questions.GetRange(0, 8)
                 },
                 new Exam
                 {
                     Name = "Integrals", Course = courses.FirstOrDefault(c => c.Name == "Math"),
                     DateAndTime = new DateTime(2015, 6, 15, 13, 0, 0), Duration = new TimeSpan(0, 1, 30, 0),
-                    Place = "D20, 105"
+                    Place = "D20, 105", Questions = questions.GetRange(8, 9)
                 },
                 new Exam
                 {
@@ -243,27 +241,27 @@ namespace Shared.Repository.Migrations
 
             var colorAnswerChoices = new List<ClosedAnswer>
             {
-                new ClosedAnswer {AnswerText = "blue", IsCorrect = true, ClosedQuestionID = closedQuestion1.ID},
-                new ClosedAnswer {AnswerText = "red", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID},
-                new ClosedAnswer {AnswerText = "green", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID},
-                new ClosedAnswer {AnswerText = "black", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID}
+                new ClosedAnswer {AnswerText = "blue", IsCorrect = true, ClosedQuestionID = closedQuestion1.ID, ClosedQuestion = closedQuestion1},
+                new ClosedAnswer {AnswerText = "red", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID, ClosedQuestion = closedQuestion1},
+                new ClosedAnswer {AnswerText = "green", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID, ClosedQuestion = closedQuestion1},
+                new ClosedAnswer {AnswerText = "black", IsCorrect = false, ClosedQuestionID = closedQuestion1.ID, ClosedQuestion = closedQuestion1}
             };
 
             closedAnswerRepository.AddRange(colorAnswerChoices);
 
             var cityAnswerChoices = new List<ClosedAnswer>
             {
-                new ClosedAnswer{AnswerText = "Wroclaw", IsCorrect = true, ClosedQuestionID = closedQuestion2.ID},
-                new ClosedAnswer{AnswerText = "London", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID},
-                new ClosedAnswer{AnswerText = "New York", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID}
+                new ClosedAnswer{AnswerText = "Wroclaw", IsCorrect = true, ClosedQuestionID = closedQuestion2.ID, ClosedQuestion = closedQuestion2},
+                new ClosedAnswer{AnswerText = "London", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID, ClosedQuestion = closedQuestion2},
+                new ClosedAnswer{AnswerText = "New York", IsCorrect = false, ClosedQuestionID = closedQuestion2.ID, ClosedQuestion = closedQuestion2}
             };
 
             closedAnswerRepository.AddRange(cityAnswerChoices);
 
             var elvisAnswerChoices = new List<ClosedAnswer>
             {
-                new ClosedAnswer{AnswerText = "Yes, of course!", IsCorrect = true, ClosedQuestionID = closedQuestion3.ID},
-                new ClosedAnswer{AnswerText = "No, man, what a bullshit!", IsCorrect = false, ClosedQuestionID = closedQuestion3.ID},
+                new ClosedAnswer{AnswerText = "Yes, of course!", IsCorrect = true, ClosedQuestionID = closedQuestion3.ID, ClosedQuestion = closedQuestion3},
+                new ClosedAnswer{AnswerText = "No, man, what a bullshit!", IsCorrect = false, ClosedQuestionID = closedQuestion3.ID, ClosedQuestion = closedQuestion3},
                
             };
 

@@ -44,6 +44,9 @@ namespace Shared.Repository
                 //.HasOptional(q => q.AnswerChoices)
                 //.WithOptionalDependent()
                 //.WillCascadeOnDelete(true);
+
+            //modelBuilder.Entity<HrDepartment>().HasRequired(a => a.HrPerson).WithRequiredDependent(b => b.HrDepartment);
+
         }
     }
 }

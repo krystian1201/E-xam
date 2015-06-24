@@ -29,7 +29,6 @@ namespace ExamDomain.Model
         public virtual List<Question> Questions { get; set; }
 
         public virtual Course Course { get; set; }
-
         public int CourseID { get; set; }
 
         public Exam()

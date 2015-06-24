@@ -23,7 +23,7 @@ namespace ExamDomain.Model
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
-        //public int ExamID { get; set; }
+        public int ExamID { get; set; }
         public virtual Exam Exam { get; set; }
 
         public Question()

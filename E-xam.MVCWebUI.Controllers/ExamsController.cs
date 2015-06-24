@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -29,7 +30,26 @@ namespace E_xam.MVCWebUI.Controllers
         //[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var exams = _examsRepository.GetAll().ToList();
+            IEnumerable<Exam> exams = new List<Exam>();
+
+            try
+            {
+                exams = _examsRepository.GetAll().ToList();
+            }
+            catch (System.Data.DataException e)
+            {
+                var innerException = e.InnerException as DbEntityValidationException;
+
+                foreach (var eve in innerException.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        
+                    }
+                }
+            }
+
+           
 
             IEnumerable<ExamViewModel> examViewModels = exams.Select(exam => new ExamViewModel(exam)).ToList();
            
