@@ -77,16 +77,16 @@
             <table id="questionsTable" class="table">
                 <tr>
                     <th style="text-align: center">
-                        @Html.Label("Question")
+                        @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().Text)
                     </th>
                     <th>
-                        @Html.Label("Time")
+                        @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().TimeToRespond)
                     </th>
                     <th>
-                        @Html.Label("Points")
+                        @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().Points)
                     </th>
                     <th>
-                        @Html.Label("Type")
+                        @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().QuestionType)
                     </th>
                 </tr>
                 
@@ -119,4 +119,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Custom/AddAndRemoveNestedForm.js"></script>
+
 }

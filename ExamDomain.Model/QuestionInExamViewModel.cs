@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace ExamDomain.Model
 {
+
+
     public class QuestionInExamViewModel
     {
         public int ID { get; set; }
@@ -19,7 +18,7 @@ namespace ExamDomain.Model
 
         [Required]
         [StringLength(50, ErrorMessage = "Questions text cannot be longer than 50 characters.")]
-        [Display(Name = "Questions text")]
+        [Display(Name = "Question text")]
         public string Text { get; set; }
 
         [Required]
@@ -28,6 +27,9 @@ namespace ExamDomain.Model
         public int Points { get; set; }
 
         public int ExamID { get; set; }
+
+        [DisplayName("Question type")]
+        public QuestionType QuestionType { get; set; }
 
 
         public QuestionInExamViewModel(Question question)
@@ -38,6 +40,19 @@ namespace ExamDomain.Model
             Points = question.Points;
             ExamID = question.Exam.ID;
 
+            if (question is ClosedQuestion)
+            {
+                QuestionType = QuestionType.Closed;
+            }
+            else if (question is OpenQuestion)
+            {
+                QuestionType = QuestionType.Open;
+            }
         }
+    }
+
+    public enum QuestionType
+    {
+        Open, Closed
     }
 }

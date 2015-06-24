@@ -117,6 +117,13 @@ namespace Shared.Repository.Migrations
                 TimeToRespond = new TimeSpan(0, 0, 5, 0)
             };
 
+            var closedQuestion3 = new ClosedQuestion
+            {
+                Points = 100,
+                Text = "Is Elvis alive?",
+                TimeToRespond = new TimeSpan(0, 0, 5, 0)
+            };
+
             var questions = new List<Question>()
             {
                  new OpenQuestion {Exam = null, ID = 0, Points = 2, Text = "What's your name?", 
@@ -131,9 +138,25 @@ namespace Shared.Repository.Migrations
                     TimeToRespond = new TimeSpan(0, 0, 5, 0)},
                 new OpenQuestion {Points = 10, Text = "Your mother maiden name?", 
                     TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                new OpenQuestion {Points = 3, Text = "What's your favorite sports club?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
+                new OpenQuestion {Points = 2, Text = "What's your favorite food?", 
+                    TimeToRespond = new TimeSpan(0, 0, 2, 0)},
+                new OpenQuestion {Points = 9, Text = "What's your favorite band?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
+                new OpenQuestion {Points = 3, Text = "What's your favorite music genre?", 
+                    TimeToRespond = new TimeSpan(0, 0, 2, 0)},
+                new OpenQuestion {Points = 3, Text = "What's the biggest city in Poland?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
+                new OpenQuestion {Points = 3, Text = "What's the biggest country in the world?", 
+                    TimeToRespond = new TimeSpan(0, 0, 3, 0)},
+                new OpenQuestion {Points = 3, Text = "What's the longest river in the world?", 
+                    TimeToRespond = new TimeSpan(0, 0, 5, 0)},
+                new OpenQuestion {Points = 3, Text = "Who killed Kennedy?", 
+                    TimeToRespond = new TimeSpan(0, 0, 1, 0)},
                 closedQuestion1,
-                closedQuestion2
-
+                closedQuestion2,
+                closedQuestion3
             };
 
             questionsRepository.AddRange(questions);
@@ -236,6 +259,15 @@ namespace Shared.Repository.Migrations
             };
 
             closedAnswerRepository.AddRange(cityAnswerChoices);
+
+            var elvisAnswerChoices = new List<ClosedAnswer>
+            {
+                new ClosedAnswer{AnswerText = "Yes, of course!", IsCorrect = true, ClosedQuestionID = closedQuestion3.ID},
+                new ClosedAnswer{AnswerText = "No, man, what a bullshit!", IsCorrect = false, ClosedQuestionID = closedQuestion3.ID},
+               
+            };
+
+            closedAnswerRepository.AddRange(elvisAnswerChoices);
             
 
             #endregion

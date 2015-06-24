@@ -210,7 +210,9 @@
     <Content Include="Views\Questions\_ClosedAnswersEditPartial.cshtml" />
     <Content Include="Views\Questions\EditorTemplates\ClosedAnswer.cshtml" />
     <Content Include="Views\Questions\DisplayTemplates\ClosedAnswer.cshtml" />
-    <Content Include="Views\Questions\EditorTemplates\QuestionInExamViewModel.cshtml" />
+    <Content Include="Views\Exams\EditorTemplates\QuestionInExamViewModelEdit.cshtml" />
+    <Content Include="Views\Exams\EditorTemplates\QuestionInExamViewModel.cshtml" />
+    <Content Include="Views\Exams\DisplayTemplates\QuestionInExamViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

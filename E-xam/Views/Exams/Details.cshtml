@@ -1,4 +1,5 @@
-﻿@model ExamDomain.Model.ExamViewModel
+﻿@using ExamDomain.Model
+@model ExamDomain.Model.ExamViewModel
 
 @{
     ViewBag.Title = "Exam details";
@@ -60,6 +61,26 @@
         </dd>
 
     </dl>
+    
+    <table class="table">
+        <tr>
+            <th style="text-align: center">
+                @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().Text)
+            </th>
+            <th>
+                @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().TimeToRespond)
+            </th>
+            <th>
+                @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().Points)
+            </th>
+            <th>
+                @Html.LabelFor(e => e.QuestionViewModels.FirstOrDefault().QuestionType)
+            </th>
+        </tr>
+
+        @Html.DisplayFor(e => e.QuestionViewModels)
+    </table>
+
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
