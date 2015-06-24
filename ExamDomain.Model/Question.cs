@@ -23,7 +23,10 @@ namespace ExamDomain.Model
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
-        public int ExamID { get; set; }
+        //public bool ToBeDeleted { get; set; }
+
+
+        public int? ExamID { get; set; }
         public virtual Exam Exam { get; set; }
 
         public Question()
@@ -37,6 +40,7 @@ namespace ExamDomain.Model
             TimeToRespond = questionInExamViewModel.TimeToRespond;
             Text = questionInExamViewModel.Text;
             Points = questionInExamViewModel.Points;
+            ExamID = questionInExamViewModel.ExamID;
             //Exam = questionInExamViewModel.ExamID;
         }
         

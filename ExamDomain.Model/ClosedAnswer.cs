@@ -21,7 +21,7 @@ namespace ExamDomain.Model
 
         public int ClosedQuestionID { get; set; }
 
-        [Required]
+        //[Required]
         public virtual ClosedQuestion ClosedQuestion { get; set; }
     }
 }

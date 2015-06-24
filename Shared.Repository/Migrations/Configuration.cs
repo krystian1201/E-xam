@@ -175,7 +175,7 @@ namespace Shared.Repository.Migrations
                 {
                     Name = "Differential calculus", Course = courses.FirstOrDefault(c => c.Name == "Math"),
                     DateAndTime = new DateTime(2015, 6, 30, 15, 30, 0), Duration = new TimeSpan(0, 1, 0, 0),
-                    Place = "A1, 30", Questions = questions.GetRange(0, 8)
+                    Place = "A1, 30", Questions = questions.GetRange(1, 8)
                 },
                 new Exam
                 {

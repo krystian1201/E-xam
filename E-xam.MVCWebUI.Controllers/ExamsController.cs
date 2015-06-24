@@ -16,7 +16,7 @@ namespace E_xam.MVCWebUI.Controllers
         private readonly ApplicationDbContext _dbContext;
         private readonly IRepository<Exam> _examsRepository;
         private readonly IRepository<Course> _coursesRepository;
-        
+        private readonly IRepository<Question> _questionsRepository;
 
         public ExamsController()
         {
@@ -24,30 +24,31 @@ namespace E_xam.MVCWebUI.Controllers
 
             _examsRepository = new Repository<Exam>(_dbContext);
             _coursesRepository = new Repository<Course>(_dbContext);
+            _questionsRepository = new Repository<Question>(_dbContext);
         }
 
         // GET: Exams
         //[Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            IEnumerable<Exam> exams = new List<Exam>();
+            //IEnumerable<Exam> exams = new List<Exam>();
 
-            try
-            {
-                exams = _examsRepository.GetAll().ToList();
-            }
-            catch (System.Data.DataException e)
-            {
-                var innerException = e.InnerException as DbEntityValidationException;
+            //try
+            //{
+                var exams = _examsRepository.GetAll().ToList();
+            //}
+            //catch (System.Data.DataException e)
+            //{
+            //    var innerException = e.InnerException as DbEntityValidationException;
 
-                foreach (var eve in innerException.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
+            //    foreach (var eve in innerException.EntityValidationErrors)
+            //    {
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
                         
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
 
            
 
@@ -137,6 +138,8 @@ namespace E_xam.MVCWebUI.Controllers
                 AvailableCourses = _coursesRepository.GetAll().ToDictionary(c => c.ID, c => c.Name)
             };
 
+            //exam.Questions = .Find(a => a.ClosedQuestionID == closedQuestion.ID).ToList();
+
             return View(examViewModel);
         }
 
@@ -146,14 +149,41 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place")] ExamViewModel examViewModel)
+        public ActionResult Edit([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place,QuestionViewModels")] ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
             {
                 var exam = new Exam(examViewModel);
 
-                _examsRepository.Update(exam);
+                foreach (var questionViewModel in examViewModel.QuestionViewModels)
+                {
+                    if (questionViewModel.ToBeDeleted)
+                    {
+                        //question is not deleted - just its exam column is "cleared"
+                        Question question =
+                            _questionsRepository.Find(q => q.ID == questionViewModel.ID).FirstOrDefault();
+                        
+                        question.Exam = null;
+                        question.ExamID = null;
 
+                        //exam.Questions.RemoveAll(q => q.ID == question.ID);
+                        
+
+                        _questionsRepository.Update(question);
+
+                    }
+                    //added question
+                    else if (questionViewModel.ExamID == 0)
+                    {
+                        Question question = new Question(questionViewModel);
+                        //question.ExamID 
+                    }
+                }
+
+                //_examsRepository.Update(exam);
+
+
+                examViewModel.QuestionViewModels.RemoveAll(q => q.ToBeDeleted == true);
                 examViewModel.Course = _coursesRepository.GetById(exam.CourseID);
 
                 return View("Details", examViewModel);

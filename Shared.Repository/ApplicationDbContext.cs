@@ -45,7 +45,11 @@ namespace Shared.Repository
                 //.WithOptionalDependent()
                 //.WillCascadeOnDelete(true);
 
-            //modelBuilder.Entity<HrDepartment>().HasRequired(a => a.HrPerson).WithRequiredDependent(b => b.HrDepartment);
+            modelBuilder.Entity<Question>()
+                 .HasOptional(q => q.Exam)
+                 .WithMany(e => e.Questions)
+                 .HasForeignKey(q => q.ExamID)
+                 .WillCascadeOnDelete(false);
 
         }
     }

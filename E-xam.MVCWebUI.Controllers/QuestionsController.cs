@@ -142,8 +142,9 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TimeToRespond,Text,Points,AnswerChoices")] ClosedQuestion question)
+        public ActionResult Edit([Bind(Include = "ID,TimeToRespond,Text,Points,AnswerChoices,ExamID")] ClosedQuestion question)
         {
+
             if (ModelState.IsValid)
             {
 

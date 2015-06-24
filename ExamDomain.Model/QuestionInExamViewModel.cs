@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations;
 namespace ExamDomain.Model
 {
 
-
     public class QuestionInExamViewModel
     {
         public int ID { get; set; }
@@ -26,11 +25,19 @@ namespace ExamDomain.Model
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
+
         public int ExamID { get; set; }
 
         [DisplayName("Question type")]
         public QuestionType QuestionType { get; set; }
 
+        public bool ToBeDeleted { get; set; }
+
+
+        public QuestionInExamViewModel()
+        {
+            
+        }
 
         public QuestionInExamViewModel(Question question)
         {
@@ -50,6 +57,7 @@ namespace ExamDomain.Model
             }
         }
     }
+
 
     public enum QuestionType
     {
