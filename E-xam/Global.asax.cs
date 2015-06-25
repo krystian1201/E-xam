@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Globalization;
 using System.Threading;
@@ -24,9 +25,23 @@ namespace E_xam
         }
 
         //it seems not to change anything
-        protected void Application_PreRequestHandlerExecute()
+        //protected void Application_PreRequestHandlerExecute()
+        //{
+        //    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
+        //}
+
+        private void Application_BeginRequest(Object source, EventArgs e)
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-GB");
+            HttpApplication application = (HttpApplication)source;
+            HttpContext context = application.Context;
+
+            string culture = null;
+            if (context.Request.UserLanguages != null && Request.UserLanguages.Length > 0)
+            {
+                culture = Request.UserLanguages[0];
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+            }
         }
 
     }

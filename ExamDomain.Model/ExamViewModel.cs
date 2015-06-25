@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using ExamDomain.Resources;
 
 namespace ExamDomain.Model
 {
@@ -9,25 +10,33 @@ namespace ExamDomain.Model
     {
         public int ID { get; set; }
 
+        [Display(Name = "Name", ResourceType = typeof(Resources_Exam))]
         [Required]
         [StringLength(50, ErrorMessage = "Exam name cannot be longer than 50 characters.")]
         public string Name { get; set; }
 
+
+        [Display(Name = "Date", ResourceType = typeof(Resources_Exam))]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        
+
+        [Display(Name = "Time", ResourceType = typeof(Resources_Exam))]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan Time { get; set; }
 
+        [Display(Name = "Duration", ResourceType = typeof(Resources_Exam))]
         [DataType(DataType.Duration)]
         [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public TimeSpan Duration { get; set; }
 
+
         //Place is an optional field
+        [Display(Name = "Place", ResourceType = typeof(Resources_Exam))]
         public string Place { get; set; }
+
 
         //public virtual List<Question> Questions { get; set; }
         public virtual List<QuestionInExamViewModel> QuestionViewModels { get; set; }

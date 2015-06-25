@@ -222,6 +222,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationDomain.Resources\ApplicationDomain.Resources.csproj">
+      <Project>{1ed29a89-959c-4daf-9492-31d1a7d91bad}</Project>
+      <Name>ApplicationDomain.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Authentication\Utils.Authentication.csproj">
       <Project>{4E80A915-7C73-444A-8632-42C71B0D3238}</Project>
       <Name>Utils.Authentication</Name>
@@ -229,6 +233,10 @@
     <ProjectReference Include="..\E-xam.MVCWebUI.Controllers\E-xam.MVCWebUI.Controllers.csproj">
       <Project>{f93e9197-e443-4d46-9785-181490b19f3e}</Project>
       <Name>E-xam.MVCWebUI.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExamDomain.Resources\ExamDomain.Resources.csproj">
+      <Project>{a765afa9-ebc7-481b-9eff-6bfe41e90475}</Project>
+      <Name>ExamDomain.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared.Repository\Shared.Repository.csproj">
       <Project>{6302EBFE-3204-4194-AD20-856156B48C2B}</Project>

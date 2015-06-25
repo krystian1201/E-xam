@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using ExamDomain.Resources;
 
 namespace ExamDomain.Model
 {
@@ -12,23 +13,25 @@ namespace ExamDomain.Model
 
         [Required]
         [DataType(DataType.Duration)]
-        [Display(Name = "Time to respond")]
+        [Display(Name = "TimeToRespond", ResourceType = typeof(Resources_Question))]
         public TimeSpan TimeToRespond { get; set; }
 
         [Required]
         [StringLength(50, ErrorMessage = "Questions text cannot be longer than 50 characters.")]
-        [Display(Name = "Question text")]
+        [Display(Name = "Text", ResourceType = typeof(Resources_Question))]
         public string Text { get; set; }
 
         [Required]
         [Range(1, 100)]
+        [Display(Name = "Points", ResourceType = typeof(Resources_Question))]
         //[DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public int Points { get; set; }
 
 
         public int ExamID { get; set; }
 
-        [DisplayName("Question type")]
+
+        [Display(Name = "QuestionType", ResourceType = typeof(Resources_Question))]
         public QuestionType QuestionType { get; set; }
 
         public bool ToBeDeleted { get; set; }

@@ -1,11 +1,14 @@
 ﻿
+@using ExamDomain.Resources
+@using ApplicationDomain.Resources
+
 @model IEnumerable<ExamDomain.Model.ExamViewModel>
 
 @{
-    ViewBag.Title = "Exams";
+    ViewBag.Title = @Resources_Exam.Exams;
 }
 
-<h2>Exams</h2>
+<h2>@Resources_Exam.Exams</h2>
 
 
 <table class="table">
@@ -53,9 +56,9 @@
                 @Html.DisplayFor(modelItem => item.Place)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink(Resources.Edit, "Edit", new { id = item.ID }) |
+                @Html.ActionLink(Resources.Details, "Details", new { id = item.ID }) |
+                @Html.ActionLink(Resources.Delete, "Delete", new { id = item.ID })
             </td>
         </tr>
     }
@@ -63,5 +66,5 @@
 </table>
 
 <p>
-    @Html.ActionLink("Create new", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink(Resources.Create_new, "Create", null, new { @class = "btn btn-default" })
 </p>
