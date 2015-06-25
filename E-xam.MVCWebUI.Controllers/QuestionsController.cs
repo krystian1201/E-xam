@@ -7,6 +7,8 @@ using Shared.Repository;
 
 namespace E_xam.MVCWebUI.Controllers
 {
+
+    [Authorize(Roles = "Teacher")]
     public class QuestionsController : Controller
     {
         
@@ -39,6 +41,7 @@ namespace E_xam.MVCWebUI.Controllers
 
 
         // GET: Questions
+
         public ActionResult Index()
         {
             

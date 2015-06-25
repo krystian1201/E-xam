@@ -55,16 +55,25 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Place)
             </td>
-            <td>
-                @Html.ActionLink(Resources.Edit, "Edit", new { id = item.ID }) |
-                @Html.ActionLink(Resources.Details, "Details", new { id = item.ID }) |
-                @Html.ActionLink(Resources.Delete, "Delete", new { id = item.ID })
-            </td>
+            
+            @if (this.User.IsInRole("Teacher"))
+            {
+                <td>
+                    @Html.ActionLink(Resources.Edit, "Edit", new { id = item.ID }) |
+                    @Html.ActionLink(Resources.Details, "Details", new { id = item.ID }) |
+                    @Html.ActionLink(Resources.Delete, "Delete", new { id = item.ID })
+                </td>
+            }
+
+            
         </tr>
     }
 
 </table>
 
-<p>
-    @Html.ActionLink(Resources.Create_new, "Create", null, new { @class = "btn btn-default" })
-</p>
+@if (this.User.IsInRole("Teacher"))
+{
+    <p>
+        @Html.ActionLink(Resources.Create_new, "Create", null, new { @class = "btn btn-default" })
+    </p>
+}

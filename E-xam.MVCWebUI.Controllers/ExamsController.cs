@@ -11,6 +11,7 @@ using Shared.Repository;
 
 namespace E_xam.MVCWebUI.Controllers
 {
+    
     public class ExamsController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -28,7 +29,7 @@ namespace E_xam.MVCWebUI.Controllers
         }
 
         // GET: Exams
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Student,Teacher")]
         public ActionResult Index()
         {
             //IEnumerable<Exam> exams = new List<Exam>();
@@ -59,6 +60,7 @@ namespace E_xam.MVCWebUI.Controllers
 
 
         // GET: Exams/Details/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -81,6 +83,7 @@ namespace E_xam.MVCWebUI.Controllers
 
 
         // GET: Exams/Create
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create()
         {
 
@@ -103,6 +106,7 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Create([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place")] ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
@@ -119,6 +123,7 @@ namespace E_xam.MVCWebUI.Controllers
 
 
         // GET: Exams/Edit/5
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -149,6 +154,7 @@ namespace E_xam.MVCWebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Edit([Bind(Include = "ID,Name,CourseID,Date,Time,Duration,Place,QuestionViewModels")] ExamViewModel examViewModel)
         {
             if (ModelState.IsValid)
@@ -195,6 +201,7 @@ namespace E_xam.MVCWebUI.Controllers
 
         // GET: Exams/Delete/5
         [HttpGet]
+        [Authorize(Roles = "Teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -217,6 +224,7 @@ namespace E_xam.MVCWebUI.Controllers
         // POST: Exams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher")]
         public ActionResult DeleteConfirmed(int id)
         {
             _examsRepository.Delete(id);
